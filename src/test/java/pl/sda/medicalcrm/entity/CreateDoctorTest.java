@@ -21,14 +21,15 @@ class CreateDoctorTest {
 
         //given
 
-        var doctor = new Doctor("1234567","Jan","Nowak","ophthalmologist");
+        var doctor = new Doctor("doctor1", "password", "1234567",
+                "Jan", "Kowalski", "Optometrist");
 
         //when
         em.persist(doctor);
         em.flush();
         em.clear();
 
-        var readDoctor = em.find(Doctor.class , doctor.getNpwz());
+        var readDoctor = em.find(Doctor.class , doctor.getId());
 
         //then
         assertEquals(readDoctor,doctor);

@@ -8,36 +8,34 @@ import java.util.Objects;
 
 import static pl.sda.medicalcrm.entity.util.Preconditions.requireNonNulls;
 
-
 @Entity
-@Table(name = "doctors")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "doctor_type")
+@DiscriminatorValue("doctor")
+public class Doctor extends User {
 
-public class Doctor {
-
-    @Id
     @NotNull
     @Size(min=7, max=7)
-    private String  npwz;
+    private String npwz;
     @NotNull
     @NotEmpty
    // @Pattern(regexp = "[a-zA-z]")
-    private String firstName;
+    private String name;
     @NotEmpty
     @NotNull
-    private String lastName;
+    private String surname;
     @NotEmpty
     @NotNull
     private String specialization;
 
+    private Doctor(){
+    }
 
-    public Doctor(String npwz, String firstName, String lastName, String specialization) {
-        requireNonNulls(npwz, firstName, lastName, specialization);
-       // suepr(login, password);
+
+    public Doctor(String login, String password, String npwz, String name, String surname, String specialization) {
+        super(login, password);
+        requireNonNulls(npwz, name, surname, specialization);
         this.npwz = npwz;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
+        this.surname = surname;
         this.specialization = specialization;
     }
 
@@ -46,11 +44,11 @@ public class Doctor {
     }
 
     public String getFirstName() {
-        return firstName;
+        return name;
     }
 
     public String getLastName() {
-        return lastName;
+        return surname;
     }
 
     public String getSpecialization() {
@@ -61,20 +59,18 @@ public class Doctor {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Doctor doctor = (Doctor) o;
-        return npwz == doctor.npwz &&
-                firstName.equals(doctor.firstName) &&
-                lastName.equals(doctor.lastName) &&
+        return npwz.equals(doctor.npwz) &&
+                name.equals(doctor.name) &&
+                surname.equals(doctor.surname) &&
                 specialization.equals(doctor.specialization);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(npwz, firstName, lastName, specialization);
+        return Objects.hash(super.hashCode(), npwz, name, surname, specialization);
     }
-
-
-
 }
 
 
