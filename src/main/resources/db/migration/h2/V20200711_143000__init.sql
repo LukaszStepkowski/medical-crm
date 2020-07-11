@@ -5,4 +5,5 @@ create table users (
     name varchar(255),
     pesel int (10),
     surname varchar(255),
+    user_type varchar(30),
     primary key (id));
