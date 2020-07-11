@@ -22,7 +22,7 @@ public class Doctor {
     private String  npwz;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "\\p{L}")
+   // @Pattern(regexp = "[a-zA-z]")
     private String firstName;
     @NotEmpty
     @NotNull

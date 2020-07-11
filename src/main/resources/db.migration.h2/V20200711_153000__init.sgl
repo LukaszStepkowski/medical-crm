@@ -1,0 +1,6 @@
+create table doctors (
+    npwz binary not null,
+    firstName varchar(255),
+    lastName varchar(255),
+    specialization varchar(255),
+    primary key (npwz));
