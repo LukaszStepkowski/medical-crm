@@ -1,26 +1,37 @@
 package pl.sda.medicalcrm.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.Objects;
 
 @Entity
 @DiscriminatorValue("patient")
-@NoArgsConstructor
-@Getter
 public class Patient extends User {
 
-        private String name;
-        private String surname;
-        private int pesel;
+    private String name;
+    private String surname;
+    private int pesel;
 
-    public Patient(String name, String surname, int pesel) {
+    private Patient(){
+    }
+
+    public Patient(String login, String password, String name, String surname, int pesel) {
+        super(login, password);
         this.name = name;
         this.surname = surname;
         this.pesel = pesel;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public int getPesel() {
+        return pesel;
     }
 
     @Override
