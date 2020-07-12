@@ -46,16 +46,14 @@ class CreateDoctorTest {
         var doctor = new Doctor("doctor1", "password", "1234566",
                 "Damian", "Nuta1", "Optometrist");
 
-        //when
-        em.persist(doctor);
-        em.flush();
-        em.clear();
+        //expect
+        Assertions.assertThrows(ConstraintViolationException.class, ()-> {
+            em.persist(doctor);
+            em.flush();
+            em.clear();
+        }, "Elo" );
 
-        var readDoctor = em.find(Doctor.class, doctor.getId());
 
-        //then
-
-        Assertions.assertThrows(ConstraintViolationException.class, ()->em.persist(doctor) );
 
     }
 
