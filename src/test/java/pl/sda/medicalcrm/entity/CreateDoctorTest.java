@@ -1,11 +1,14 @@
 package pl.sda.medicalcrm.entity;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.validation.ConstraintViolationException;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,6 +36,27 @@ class CreateDoctorTest {
 
         //then
         assertEquals(readDoctor,doctor);
+    }
+    @Test
+    @Transactional
+    void testExpectedException() {
+
+        //given
+
+        var doctor = new Doctor("doctor1", "password", "1234566",
+                "Damian", "Nuta1", "Optometrist");
+
+        //when
+        em.persist(doctor);
+        em.flush();
+        em.clear();
+
+        var readDoctor = em.find(Doctor.class, doctor.getId());
+
+        //then
+
+        Assertions.assertThrows(ConstraintViolationException.class, ()->em.persist(doctor) );
+
     }
 
 }
