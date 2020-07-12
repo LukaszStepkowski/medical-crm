@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public final class CreateDoctorDto extends User {
+public final class CreateDoctorDto  {
 
 
     @NotEmpty
@@ -41,7 +41,8 @@ public final class CreateDoctorDto extends User {
 
 
     public CreateDoctorDto(String login, String password, String npwz, String name, String surname, String specialization ) {
-        super(login, password);
+        this.login=login;
+        this.password=password;
         this.npwz = npwz;
         this.name = name;
         this.surname = surname;
@@ -64,20 +65,30 @@ public final class CreateDoctorDto extends User {
         return specialization;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CreateDoctorDto doctorDto = (CreateDoctorDto) o;
-        return npwz.equals(doctorDto.npwz) &&
-                name.equals(doctorDto.name) &&
-                surname.equals(doctorDto.surname) &&
-                specialization.equals(doctorDto.specialization);
+        CreateDoctorDto that = (CreateDoctorDto) o;
+        return npwz.equals(that.npwz) &&
+                name.equals(that.name) &&
+                surname.equals(that.surname) &&
+                specialization.equals(that.specialization) &&
+                login.equals(that.login) &&
+                password.equals(that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(npwz, name, surname, specialization);
+        return Objects.hash(npwz, name, surname, specialization, login, password);
     }
 }
 
