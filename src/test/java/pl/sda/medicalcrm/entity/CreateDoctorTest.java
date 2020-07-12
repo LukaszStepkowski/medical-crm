@@ -20,7 +20,7 @@ class CreateDoctorTest {
 
     @Test
     @Transactional
-    void testCreateDoctor(){
+    void testCreateDoctor() {
 
         //given
 
@@ -32,11 +32,12 @@ class CreateDoctorTest {
         em.flush();
         em.clear();
 
-        var readDoctor = em.find(Doctor.class , doctor.getId());
+        var readDoctor = em.find(Doctor.class, doctor.getId());
 
         //then
-        assertEquals(readDoctor,doctor);
+        assertEquals(readDoctor, doctor);
     }
+
     @Test
     @Transactional
     void testExpectedException() {
@@ -46,16 +47,13 @@ class CreateDoctorTest {
         var doctor = new Doctor("doctor1", "password", "1234566",
                 "Damian", "Nuta1", "Optometrist");
 
-        //when
-        em.persist(doctor);
-        em.flush();
-        em.clear();
-
-        var readDoctor = em.find(Doctor.class, doctor.getId());
-
         //then
 
-        Assertions.assertThrows(ConstraintViolationException.class, ()->em.persist(doctor) );
+        Assertions.assertThrows(ConstraintViolationException.class, () -> {
+            em.persist(doctor);
+            em.flush();
+            em.clear();
+        });
 
     }
 
