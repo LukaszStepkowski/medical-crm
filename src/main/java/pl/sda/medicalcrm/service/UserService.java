@@ -37,7 +37,7 @@ public class UserService {
     }
     @Transactional
     public UUID createDoctor(CreateDoctorDto dto) {
-        var doctor =new Doctor(dto.getNpwz(), dto.getName(), dto.getSurname(),dto.getSpecialization());
+        var doctor =new Doctor(dto.getLogin(), dto.getPassword(),dto.getNpwz(), dto.getName(), dto.getSurname(),dto.getSpecialization());
         repository.save(doctor);
         return doctor.getId();
     }

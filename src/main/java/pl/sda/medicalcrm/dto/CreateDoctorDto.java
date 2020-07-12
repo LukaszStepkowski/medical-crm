@@ -1,16 +1,22 @@
 
 package pl.sda.medicalcrm.dto;
 
+import com.sun.istack.NotNull;
+import pl.sda.medicalcrm.entity.User;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public final class CreateDoctorDto {
+public final class CreateDoctorDto extends User {
 
 
     @NotEmpty
     @NotBlank
+    @NotNull
+    @Size(min=7, max=7)
     private String npwz;
     @NotEmpty
     @NotBlank
@@ -24,8 +30,18 @@ public final class CreateDoctorDto {
     @NotBlank
     @Pattern(regexp = "\\w[a-zA-Z]{1,}")
     private String specialization;
+    @NotBlank
+    @NotEmpty
+    @Pattern(regexp = "[a-z]{6}")
+    private String login;
+    @NotEmpty
+    //minimum 8 characters and at least one Capital letter, one lower letter, one digit and one special character
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$")
+    private String password;
 
-    public CreateDoctorDto(String npwz, String name, String surname, String specialization) {
+
+    public CreateDoctorDto(String login, String password, String npwz, String name, String surname, String specialization ) {
+        super(login, password);
         this.npwz = npwz;
         this.name = name;
         this.surname = surname;

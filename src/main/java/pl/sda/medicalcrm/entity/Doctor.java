@@ -11,23 +11,13 @@ import java.util.Objects;
 @DiscriminatorValue("doctor")
 public class Doctor extends User {
 
-    @NotNull
-    @Size(min=7, max=7)
+
     private String npwz;
-    @NotNull
-    @NotEmpty
-    @Pattern(regexp = "[\\p{L}]+")
     private String name;
-    @NotEmpty
-    @NotNull
-    @Pattern(regexp = "[\\p{L}]+")
     private String surname;
-    @NotEmpty
-    @NotNull
-    @Pattern(regexp = "\\w[a-zA-Z]{1,}")
     private String specialization;
 
-    public Doctor(String npwz, String name, String surname, String specialization){
+    public Doctor(){
     }
 
 
