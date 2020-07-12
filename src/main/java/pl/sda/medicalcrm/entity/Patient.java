@@ -10,12 +10,12 @@ public class Patient extends User {
 
     private String name;
     private String surname;
-    private int pesel;
+    private String pesel;
 
     private Patient(){
     }
 
-    public Patient(String login, String password, String name, String surname, int pesel) {
+    public Patient(String login, String password, String name, String surname, String pesel) {
         super(login, password);
         this.name = name;
         this.surname = surname;
@@ -30,7 +30,7 @@ public class Patient extends User {
         return surname;
     }
 
-    public int getPesel() {
+    public String getPesel() {
         return pesel;
     }
 

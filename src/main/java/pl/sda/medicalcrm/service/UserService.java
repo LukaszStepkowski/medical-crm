@@ -22,11 +22,12 @@ public class UserService {
     @Transactional
     public UUID createPatient(CreatePatientDto dto) {
         var patient = new Patient(dto.getLogin(), dto.getPassword(), dto.getName(),
-                dto.getSurname(), Integer.valueOf(dto.getPesel()));
+                dto.getSurname(), dto.getPesel());
         repository.save(patient);
         return patient.getId();
     }
 
+    @Transactional
     public UUID createCrmSpecialist(CreateCrmSpecialistDto dto) {
         var crmSpecialist = new CrmSpecialist(dto.getLogin(), dto.getPassword(), dto.getName(), dto.getSurname());
         repository.save(crmSpecialist);

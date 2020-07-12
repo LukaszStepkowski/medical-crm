@@ -3,7 +3,7 @@ create table users (
     login varchar(255),
     password varchar(255),
     name varchar(255),
-    pesel int (10),
+    pesel varchar (11),
     npwz varchar(7),
     specialization varchar (255),
     surname varchar(255),
