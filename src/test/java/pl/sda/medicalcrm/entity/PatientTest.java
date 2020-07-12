@@ -18,7 +18,7 @@ public class PatientTest {
     @Test
     void TestCreatePatient(){
         //given
-        var patient = new Patient("login", "password", "Jan", "Kowalski", 123456789);
+        var patient = new Patient("login", "password", "Jan", "Kowalski", "123456789");
 
         //when
         em.persist(patient);
