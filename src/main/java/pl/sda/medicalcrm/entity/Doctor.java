@@ -24,9 +24,10 @@ public class Doctor extends User {
     private String surname;
     @NotEmpty
     @NotNull
+    @Pattern(regexp = "\\w[a-zA-Z]{1,}")
     private String specialization;
 
-    private Doctor(){
+    public Doctor(String npwz, String name, String surname, String specialization){
     }
 
 

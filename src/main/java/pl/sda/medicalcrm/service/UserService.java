@@ -2,8 +2,10 @@ package pl.sda.medicalcrm.service;
 
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.dto.CreateCrmSpecialistDto;
+import pl.sda.medicalcrm.dto.CreateDoctorDto;
 import pl.sda.medicalcrm.dto.CreatePatientDto;
 import pl.sda.medicalcrm.entity.CrmSpecialist;
+import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.Patient;
 import pl.sda.medicalcrm.repository.UserRepository;
 
@@ -32,5 +34,11 @@ public class UserService {
         var crmSpecialist = new CrmSpecialist(dto.getLogin(), dto.getPassword(), dto.getName(), dto.getSurname());
         repository.save(crmSpecialist);
         return crmSpecialist.getId();
+    }
+    @Transactional
+    public UUID createDoctor(CreateDoctorDto dto) {
+        var doctor =new Doctor(dto.getNpwz(), dto.getName(), dto.getSurname(),dto.getSpecialization());
+        repository.save(doctor);
+        return doctor.getId();
     }
 }

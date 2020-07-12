@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sda.medicalcrm.dto.CreateCrmSpecialistDto;
+import pl.sda.medicalcrm.dto.CreateDoctorDto;
 import pl.sda.medicalcrm.dto.CreatePatientDto;
 import pl.sda.medicalcrm.dto.UserIdDto;
 import pl.sda.medicalcrm.service.UserService;
@@ -38,4 +39,13 @@ public class UserRestController {
                 .status(HttpStatus.CREATED)
                 .body(new UserIdDto(id));
     }
+
+    @PostMapping(path = "/doctor")
+    ResponseEntity<UserIdDto> createCrmSpecialist(@RequestBody @Valid CreateDoctorDto dto) {
+        var id = service.createDoctor(dto);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new UserIdDto(id));
+    }
+
 }
