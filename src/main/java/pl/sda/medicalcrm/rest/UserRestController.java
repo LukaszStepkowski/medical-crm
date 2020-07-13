@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.sda.medicalcrm.dto.CreateCrmSpecialistDto;
-import pl.sda.medicalcrm.dto.CreateDoctorDto;
-import pl.sda.medicalcrm.dto.CreatePatientDto;
-import pl.sda.medicalcrm.dto.UserIdDto;
+import pl.sda.medicalcrm.dto.*;
 import pl.sda.medicalcrm.service.UserService;
 
 import javax.validation.Valid;
@@ -48,4 +45,11 @@ public class UserRestController {
                 .body(new UserIdDto(id));
     }
 
+    @PostMapping(path = "/admins")
+    ResponseEntity<UserIdDto> createAdmin(@RequestBody @Valid CreateAdminDto dto) {
+        var id = service.createAdmin(dto);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new UserIdDto(id));
+    }
 }
