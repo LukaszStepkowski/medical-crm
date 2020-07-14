@@ -1,24 +1,63 @@
 package pl.sda.medicalcrm.entity;
 
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Service;
+import javax.persistence.Entity;
+import java.util.Objects;
 
-@Service
+@Entity
 public class EmailSender {
 
-    private final JavaMailSender javaMailSender;
+    private String patientEmail;
+    private String patientName;
+    private String emailTitle;
+    private String emailHeader;
+    private String emailText;
 
-    EmailSender(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
+    private EmailSender() {
     }
 
-    public void sendEmail(String to, String from, String title, String content) {
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(to);
-        mail.setFrom(from);
-        mail.setSubject(title);
-        mail.setText(content);
-        javaMailSender.send(mail);
+    public EmailSender(String patientEmail, String patientName, String emailTitle, String emailHeader, String emailText) {
+        this.patientEmail = patientEmail;
+        this.patientName = patientName;
+        this.emailTitle = emailTitle;
+        this.emailHeader = emailHeader;
+        this.emailText = emailText;
+    }
+
+
+    public String getPatientEmail() {
+        return patientEmail;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public String getEmailTitle() {
+        return emailTitle;
+    }
+
+    public String getEmailHeader() {
+        return emailHeader;
+    }
+
+    public String getEmailText() {
+        return emailText;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmailSender that = (EmailSender) o;
+        return patientEmail.equals(that.patientEmail) &&
+                patientName.equals(that.patientName) &&
+                emailTitle.equals(that.emailTitle) &&
+                emailHeader.equals(that.emailHeader) &&
+                emailText.equals(that.emailText);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(patientEmail, patientName, emailTitle, emailHeader, emailText);
     }
 }

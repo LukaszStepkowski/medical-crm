@@ -1,6 +1,5 @@
 package pl.sda.medicalcrm.mail;
 
-import antlr.Version;
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.MailjetClient;
@@ -23,17 +22,16 @@ public class MyClass {
                         .put(new JSONObject()
                                 .put(Emailv31.Message.FROM, new JSONObject()
                                         .put("Email", "medicalcrm23@gmail.com")
-                                        .put("Name", "Grzegorz"))
+                                        .put("Name", "MedicalCRM"))
                                 .put(Emailv31.Message.TO, new JSONArray()
                                         .put(new JSONObject()
-                                                .put("Email", "medicalcrm23@gmail.com")
-                                                .put("Name", "Grzegorz")))
-                                .put(Emailv31.Message.SUBJECT, "Greetings from Mailjet.")
-                                .put(Emailv31.Message.TEXTPART, "My first Mailjet email")
-                                .put(Emailv31.Message.HTMLPART, "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!")
-                                .put(Emailv31.Message.CUSTOMID, "AppGettingStartedTest")));
+                                                .put("Email", "buuka@op.pl")
+                                                .put("Name", "UserName")))
+                                .put(Emailv31.Message.SUBJECT, "tytul")
+                                .put(Emailv31.Message.HTMLPART, "<h3>Nagłowek</a></h3><br />Treść maila")));
         response = client.post(request);
         System.out.println(response.getStatus());
         System.out.println(response.getData());
     }
 }
+
