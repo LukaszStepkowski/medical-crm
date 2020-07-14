@@ -1,3 +1,4 @@
+/*
 package pl.sda.medicalcrm.entity;
 
 import org.junit.jupiter.api.Assertions;
@@ -54,3 +55,4 @@ public class UserDoctorNameModifyTest {
 
    }
 }
+*/
