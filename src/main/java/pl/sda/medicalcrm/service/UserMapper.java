@@ -8,11 +8,11 @@ import pl.sda.medicalcrm.entity.User;
 import java.lang.annotation.Documented;
 import java.util.List;
 
-@Component
+
 public class UserMapper {
 
 
-    private UserQueryResultDto map(User user) {
+    public UserQueryResultDto map(User user) {
         return new UserQueryResultDto(
 
                 user.getId(),

@@ -44,7 +44,7 @@ class CreateDoctorTest {
 
         //given
 
-        var doctor = new Doctor("doctor1", "password", "1234566",
+        var doctor = new Doctor("doctor", "Passwor1", "1234566",
                 "Damian", "Nuta1", "Optometrist");
 
         //then

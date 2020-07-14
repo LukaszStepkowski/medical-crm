@@ -1,13 +1,18 @@
 package pl.sda.medicalcrm.dto;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class UserQueryResultDto {
+
+    public UserQueryResultDto(UUID id, String login, String password, UserType userType) {
+    }
 
     public enum UserType{
 
         PATIENT, DOCTOR;
     }
+
 
     private UserType type;
     private String login;
