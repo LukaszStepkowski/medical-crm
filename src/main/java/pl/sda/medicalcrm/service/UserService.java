@@ -45,6 +45,18 @@ public class UserService {
     }
 
     @Transactional
+    public void changeDoctorName(UUID userId, String name){repository.updateDoctorName(userId,name);}
+    @Transactional
+    public void changeDoctorSurname(UUID userId, String surname){repository.updateDoctorSurname(userId,surname);}
+
+    @Transactional
+    void changeSpecialization(UUID userId, String specialization ){repository.updateDoctorSpecialization(userId,specialization);}
+
+
+
+
+
+    @Transactional
     public UUID createAdmin(CreateAdminDto dto) {
         var admin = new Admin(dto.getLogin(), dto.getPassword(), dto.getName(), dto.getSurname());
         repository.save(admin);
