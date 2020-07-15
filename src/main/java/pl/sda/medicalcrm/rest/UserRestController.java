@@ -19,12 +19,19 @@ public class UserRestController {
         this.service = service;
     }
 
-    @PostMapping
+    @PostMapping (path = "/patients")
     ResponseEntity<UserIdDto> createPatient(@RequestBody @Valid CreatePatientDto dto) {
         var id = service.createPatient(dto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new UserIdDto(id));
+    }
+
+    @PutMapping(path = "/patients/{userId}")
+    ResponseEntity<UserIdDto>changePatientEntity(@PathVariable UUID userId,
+                                                 @RequestBody @Valid ChangeUserPatientDto dto){
+        service.changePatientEntity(userId,dto.getLogin(), dto.getPassword(), dto.getName(), dto.getSurname(), dto.getPesel());
+        return  ResponseEntity.ok().build();
     }
 
     @PostMapping(path = "/crmspecialists")

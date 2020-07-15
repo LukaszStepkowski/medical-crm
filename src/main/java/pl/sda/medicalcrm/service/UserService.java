@@ -49,14 +49,9 @@ public class UserService {
     public void changeDoctorEntity(UUID userId, String login, String password,String npwz, String name, String surname, String specialization){
         repository.updateDoctorEntity(userId, login,password,npwz, name, surname,specialization); }
 
-/*    @Transactional
-    public void changeDoctorName(UUID userId, String name){repository.updateDoctorName(userId,name);}
     @Transactional
-    public void changeDoctorSurname(UUID userId, String surname){repository.updateDoctorSurname(userId,surname);}
-
-    @Transactional
-    void changeSpecialization(UUID userId, String specialization ){repository.updateDoctorSpecialization(userId,specialization);}*/
-
+    public void changePatientEntity(UUID userId, String login, String password, String name, String surname, String pesel){
+        repository.updatePatientEntity(userId,login,password,name,surname,pesel); }
 
 
 

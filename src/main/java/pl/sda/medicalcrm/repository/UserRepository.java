@@ -16,7 +16,9 @@ public interface UserRepository extends JpaRepository<User, UUID>, JpaSpecificat
     int updateDoctorEntity(UUID id, String login, String password, String npwz, String name, String surname, String specialization);
 
 
-
+    @Modifying
+    @Query("update Patient c set c.login =?2, c.password =?3, c.name =?4, c.surname =?5, c.pesel =?6 where  c.id =?1")
+    int updatePatientEntity(UUID id, String login, String password, String name, String surname, String pesel);
 
 }
 
