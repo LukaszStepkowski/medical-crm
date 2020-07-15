@@ -35,7 +35,7 @@ public class UserRestController {
                 .body(new UserIdDto(id));
     }
 
-    @PostMapping(path = "/doctor")
+    @PostMapping(path = "/doctors")
     ResponseEntity<UserIdDto> createCrmSpecialist(@RequestBody @Valid CreateDoctorDto dto) {
         var id = service.createDoctor(dto);
         return ResponseEntity
@@ -44,7 +44,7 @@ public class UserRestController {
     }
 
     @PutMapping(path = "/doctors/{userId}")
-    ResponseEntity<Void> changeDoctorEntity(@PathVariable UUID userId,
+    ResponseEntity<UserIdDto> changeDoctorEntity(@PathVariable UUID userId,
                                            @RequestBody @Valid ChangeUserDoctorDto dto) {
 
         service.changeDoctorEntity(userId,dto.getLogin(), dto.getPassword(), dto.getNpwz(), dto.getName(), dto.getSurname(), dto.getSpecialization());
