@@ -6,9 +6,13 @@ public enum CrmMail {
     CRMADDRESS("medicalcrm23@gmail.com"),
     CRMNAME("MedicalCRM");
 
-    private String value;
+    public String value;
 
-    CrmMail(String value) {
-        this.value = value;
+    CrmMail(String v) {
+        value = v;
+    }
+
+   public String showValue() {
+        return value;
     }
 }
