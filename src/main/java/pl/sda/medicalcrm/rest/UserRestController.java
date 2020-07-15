@@ -54,7 +54,7 @@ public class UserRestController {
     ResponseEntity<UserIdDto> changeDoctorEntity(@PathVariable UUID userId,
                                            @RequestBody @Valid ChangeUserDoctorDto dto) {
 
-        service.changeDoctorEntity(userId,dto.getLogin(), dto.getPassword(), dto.getNpwz(), dto.getName(), dto.getSurname(), dto.getSpecialization());
+        service.changeDoctorEntity(userId,dto.getLogin(), dto.getPassword(), dto.getNpwz(), dto.getName(), dto.getSurname());
         return ResponseEntity.ok().build();
     }
 

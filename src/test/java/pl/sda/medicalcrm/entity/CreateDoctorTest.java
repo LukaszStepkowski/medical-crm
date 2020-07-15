@@ -25,7 +25,7 @@ class CreateDoctorTest {
         //given
 
         var doctor = new Doctor("doctor1", "password", "1234567",
-                "Jan", "Kowalski", "Optometrist");
+                "Jan", "Kowalski");
 
         //when
         em.persist(doctor);
@@ -45,7 +45,7 @@ class CreateDoctorTest {
         //given
 
         var doctor = new Doctor("doctor", "Passwor1", "1234566",
-                "Damian", "Nuta1", "Optometrist");
+                "Damian", "Nuta1");
 
         //then
 

@@ -26,10 +26,6 @@ public final class CreateDoctorDto  {
     @NotBlank
     @Pattern(regexp = "\\w[a-zA-Z]{1,}")
     private String surname;
-    @NotEmpty
-    @NotBlank
-    @Pattern(regexp = "\\w[a-zA-Z]{1,}")
-    private String specialization;
     @NotBlank
     @NotEmpty
     @Pattern(regexp = "[a-z]{6}")
@@ -40,13 +36,13 @@ public final class CreateDoctorDto  {
     private String password;
 
 
-    public CreateDoctorDto(String login, String password, String npwz, String name, String surname, String specialization ) {
+    public CreateDoctorDto(String login, String password, String npwz, String name, String surname) {
         this.login=login;
         this.password=password;
         this.npwz = npwz;
         this.name = name;
         this.surname = surname;
-        this.specialization = specialization;
+
     }
 
     public String getNpwz() {
@@ -59,10 +55,6 @@ public final class CreateDoctorDto  {
 
     public String getSurname() {
         return surname;
-    }
-
-    public String getSpecialization() {
-        return specialization;
     }
 
     public String getLogin() {
@@ -81,14 +73,13 @@ public final class CreateDoctorDto  {
         return npwz.equals(that.npwz) &&
                 name.equals(that.name) &&
                 surname.equals(that.surname) &&
-                specialization.equals(that.specialization) &&
                 login.equals(that.login) &&
                 password.equals(that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(npwz, name, surname, specialization, login, password);
+        return Objects.hash(npwz, name, surname, login, password);
     }
 }
 

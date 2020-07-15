@@ -20,18 +20,16 @@ public class UserQueryResultDto {
     private String npwz;
     private String name;
     private String surname;
-    private String specialization;
     private String pesel;
 
 
-    public UserQueryResultDto(UserType type, String login, String password, String npwz, String name, String surname, String specialization, String pesel) {
+    public UserQueryResultDto(UserType type, String login, String password, String npwz, String name, String surname, String pesel) {
         this.type = type;
         this.login = login;
         this.password = password;
         this.npwz = npwz;
         this.name = name;
         this.surname = surname;
-        this.specialization = specialization;
         this.pesel = pesel;
     }
 
@@ -59,10 +57,6 @@ public class UserQueryResultDto {
         return surname;
     }
 
-    public String getSpecialization() {
-        return specialization;
-    }
-
     public String getPesel() {
         return pesel;
     }
@@ -78,12 +72,11 @@ public class UserQueryResultDto {
                 npwz.equals(that.npwz) &&
                 name.equals(that.name) &&
                 surname.equals(that.surname) &&
-                specialization.equals(that.specialization) &&
                 pesel.equals(that.pesel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, login, password, npwz, name, surname, specialization, pesel);
+        return Objects.hash(type, login, password, npwz, name, surname, pesel);
     }
 }

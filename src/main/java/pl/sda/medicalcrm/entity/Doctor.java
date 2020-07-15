@@ -15,18 +15,17 @@ public class Doctor extends User {
     private String npwz;
     private String name;
     private String surname;
-    private String specialization;
 
     public Doctor(){
     }
 
 
-    public Doctor(String login, String password, String npwz, String name, String surname, String specialization) {
+    public Doctor(String login, String password, String npwz, String name, String surname) {
         super(login, password);
         this.npwz = npwz;
         this.name = name;
         this.surname = surname;
-        this.specialization = specialization;
+
     }
 
     public String getNpwz() { return npwz; }
@@ -34,8 +33,6 @@ public class Doctor extends User {
     public String getName() { return name; }
 
     public String getSurname() { return surname; }
-
-    public String getSpecialization() { return specialization; }
 
     @Override
     public boolean equals(Object o) {
@@ -45,13 +42,12 @@ public class Doctor extends User {
         Doctor doctor = (Doctor) o;
         return npwz.equals(doctor.npwz) &&
                 name.equals(doctor.name) &&
-                surname.equals(doctor.surname) &&
-                specialization.equals(doctor.specialization);
+                surname.equals(doctor.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), npwz, name, surname, specialization);
+        return Objects.hash(super.hashCode(), npwz, name, surname);
     }
 }
 

@@ -19,17 +19,14 @@ public class ChangeUserDoctorDto {
     @NotNull
     @NotBlank
     private String surname;
-    @NotNull
-    @NotBlank
-    private String specialization;
 
-    public ChangeUserDoctorDto(String login, String password, String npwz, String name, String surname, String specialization) {
+    public ChangeUserDoctorDto(String login, String password, String npwz, String name, String surname) {
         this.login = login;
         this.password = password;
         this.npwz = npwz;
         this.name = name;
         this.surname = surname;
-        this.specialization = specialization;
+
     }
 
     ChangeUserDoctorDto(){}
@@ -54,8 +51,5 @@ public class ChangeUserDoctorDto {
         return surname;
     }
 
-    public String getSpecialization() {
-        return specialization;
-    }
 
 }

@@ -7,7 +7,6 @@ public class UserQueryDto {
     private String npwz;
     private String name;
     private String surname;
-    private String specialization;
     private String pesel;
 
     public String getLogin() {
@@ -48,14 +47,6 @@ public class UserQueryDto {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
     }
 
     public String getPesel() {

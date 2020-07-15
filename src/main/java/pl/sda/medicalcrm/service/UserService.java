@@ -39,15 +39,15 @@ public class UserService {
     }
     @Transactional
     public UUID createDoctor(CreateDoctorDto dto) {
-        var doctor =new Doctor(dto.getLogin(), dto.getPassword(),dto.getNpwz(), dto.getName(), dto.getSurname(),dto.getSpecialization());
+        var doctor =new Doctor(dto.getLogin(), dto.getPassword(),dto.getNpwz(), dto.getName(), dto.getSurname());
         repository.save(doctor);
         return doctor.getId();
     }
 
 
     @Transactional
-    public void changeDoctorEntity(UUID userId, String login, String password,String npwz, String name, String surname, String specialization){
-        repository.updateDoctorEntity(userId, login,password,npwz, name, surname,specialization); }
+    public void changeDoctorEntity(UUID userId, String login, String password,String npwz, String name, String surname){
+        repository.updateDoctorEntity(userId, login,password,npwz, name, surname); }
 
     @Transactional
     public void changePatientEntity(UUID userId, String login, String password, String name, String surname, String pesel){
