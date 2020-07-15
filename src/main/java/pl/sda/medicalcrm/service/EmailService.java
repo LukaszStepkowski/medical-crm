@@ -22,7 +22,7 @@ public class EmailService {
 
     public void sendEmail(EmailSenderDto dto) throws MailjetException, MailjetSocketTimeoutException {
         String title = "Account has been created";
-        String header = "<h3>Dear" + dto.getPatientName() + "</a></h3>";
+        String header = "<h3>Dear " + dto.getPatientName() + "</a></h3>";
         String text = "Your new account has been created";
         MailjetClient client;
         MailjetRequest request;

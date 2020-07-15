@@ -14,7 +14,6 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository repository;
-    public EmailService emailService;
 
     public UserService (UserRepository repository) {
         this.repository = repository;
@@ -53,6 +52,7 @@ public class UserService {
         var patient = new Patient(dto.getLogin(), dto.getPassword(), dto.getName(),
                 dto.getSurname(), dto.getPesel());
         EmailSenderDto emailDto = new EmailSenderDto(dto.getLogin(), dto.getName());
+        EmailService emailService = new EmailService();
         emailService.sendEmail(emailDto);
         repository.save(patient);
         return patient.getId();
