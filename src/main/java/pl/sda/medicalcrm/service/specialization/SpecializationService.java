@@ -2,10 +2,13 @@ package pl.sda.medicalcrm.service.specialization;
 
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.dto.SpecializationDto;
+import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.Specialization;
+import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.repository.SpecializationRepository;
 
 
+import javax.print.Doc;
 import javax.transaction.Transactional;
 import java.util.List;
 @Service

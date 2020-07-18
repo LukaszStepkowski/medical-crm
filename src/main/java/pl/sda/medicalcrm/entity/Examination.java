@@ -3,12 +3,13 @@ package pl.sda.medicalcrm.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name = "examination")
+@Table(name = "examinations")
 
 public class Examination {
 
@@ -16,11 +17,13 @@ public class Examination {
     private UUID id;
     private String type;
     private String result;
-    private List<String> picturePath;
+    private String picturePath;
     private String description;
 
+    public Examination() {
+    }
 
-    public Examination(UUID id, String type, String result, List<String> picturePath, String description) {
+    public Examination(UUID id, String type, String result, String picturePath, String description) {
         this.id = id;
         this.type = type;
         this.result = result;
@@ -40,7 +43,7 @@ public class Examination {
         return result;
     }
 
-    public List<String> getPicturePath() {
+    public String getPicturePath() {
         return picturePath;
     }
 

@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserRestController {
 
     private final UserService service;
@@ -21,15 +22,15 @@ public class UserRestController {
         this.service = service;
     }
 
-    @PostMapping (path = "/patients")
-    ResponseEntity<UserIdDto> createPatient(@RequestBody @Valid CreatePatientDto dto) {
-        var id = service.createPatient(dto);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new UserIdDto(id));
-    }
+//    @PostMapping (path = "/patients")
+//    ResponseEntity<UserIdDto> createPatient(@RequestBody @Valid CreatePatientDto dto) {
+//        var id = service.createPatient(dto);
+//        return ResponseEntity
+//                .status(HttpStatus.CREATED)
+//                .body(new UserIdDto(id));
+//    }
 
-    @PostMapping (path = "/patientsWithEmail")
+    @PostMapping (path = "/patients")
     ResponseEntity<UserIdDto> createPatientWithSendingEmail(@RequestBody @Valid CreatePatientDto dto) throws MailjetSocketTimeoutException, MailjetException {
         var id = service.createPatientWithSendingEmail(dto);
         return ResponseEntity

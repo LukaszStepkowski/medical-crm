@@ -1,9 +1,8 @@
 package pl.sda.medicalcrm.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -17,14 +16,13 @@ public class Specialization {
 
     String typeOfSpecialization;
 
+    public Specialization() {
+    }
 
-    public Specialization( String typeOfSpecialization) {
+    public Specialization(String typeOfSpecialization) {
         this.id =UUID.randomUUID();
         this.typeOfSpecialization = typeOfSpecialization;
     }
-
-
-    public Specialization(){}
 
     public UUID getId() {
         return id;
@@ -39,11 +37,12 @@ public class Specialization {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Specialization that = (Specialization) o;
-        return typeOfSpecialization.equals(that.typeOfSpecialization);
+        return id.equals(that.id) &&
+                typeOfSpecialization.equals(that.typeOfSpecialization);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(typeOfSpecialization);
+        return Objects.hash(id, typeOfSpecialization);
     }
 }

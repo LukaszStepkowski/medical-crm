@@ -1,37 +1,42 @@
 package pl.sda.medicalcrm.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Time;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
-@Table(name = "appointment")
+@Table(name = "appointments")
 public class Appointment {
 
     @Id
     private UUID id;
     private LocalDateTime date;
-    private String patient;
-    private String specialization;
-    private List<String> examinations;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Patient patient;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Specialization specialization;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Examination> examinations;
+
     private String clinic;
     private boolean isOnline;
     private String prescription;
 
-    public Appointment(UUID id, LocalDateTime date, String patient, String specialization,
-                       List<String> examinations, String clinic, boolean isOnline, String prescription) {
+    public Appointment() {
+    }
+
+    public Appointment(UUID id, LocalDateTime date, Patient patient, Specialization specialization,
+                       String clinic, boolean isOnline, String prescription) {
         this.id = id;
         this.date = date;
         this.patient = patient;
         this.specialization = specialization;
-        this.examinations = examinations;
+        this.examinations = new ArrayList<>();
         this.clinic = clinic;
         this.isOnline = isOnline;
         this.prescription = prescription;
@@ -45,16 +50,22 @@ public class Appointment {
         return date;
     }
 
-    public String getPatient() {
+    public Patient getPatient() {
         return patient;
     }
 
-    public String getSpecialization() {
+    public Specialization getSpecialization() {
         return specialization;
     }
 
-    public List<String> getExaminations() {
-        return examinations;
+    public void addExamination(Examination examination) {
+        if (!examinations.contains(examination)){
+            examinations.add(examination);
+        }
+    }
+
+    public List<Examination> getExaminations() {
+        return new ArrayList<>(examinations);
     }
 
     public String getClinic() {
