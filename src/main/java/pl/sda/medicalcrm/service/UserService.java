@@ -76,9 +76,9 @@ public class UserService {
         repository.updateDoctorPassword(userId,password);
     }
 
-//    @Transactional
-//    public void changeCrmSpecialistPassword(UUID userId, String password){
-//        repository.updateCrmSpecialistPassword(userId,password);
-//    }
+    @Transactional
+    public void changeCrmSpecialistPassword(UUID userId, String password){
+        repository.updateCrmSpecialistPassword(userId,password);
+    }
 
 }

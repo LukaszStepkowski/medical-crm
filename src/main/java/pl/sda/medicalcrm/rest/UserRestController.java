@@ -43,7 +43,7 @@ public class UserRestController {
     }
 
     @PostMapping(path = "/doctors")
-    ResponseEntity<UserIdDto> createCrmSpecialist(@RequestBody @Valid CreateDoctorDto dto) {
+    ResponseEntity<UserIdDto> createDoctor(@RequestBody @Valid CreateDoctorDto dto) {
         var id = service.createDoctor(dto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -80,10 +80,10 @@ public class UserRestController {
         return  ResponseEntity.ok().build();
     }
 
-//    @PutMapping(path = "/crmspecialists/{userId}/password")
-//    ResponseEntity<UserIdDto>changeCrmSpecialistPassword(@PathVariable UUID userId,
-//                                                  @RequestBody @Valid ChangeCrmSpecialistPasswordDto dto){
-//        service.changeCrmSpecialistPassword(userId, dto.getPassword());
-//        return  ResponseEntity.ok().build();
-//    }
+    @PutMapping(path = "/crmspecialists/{userId}/password")
+    ResponseEntity<UserIdDto>changeCrmSpecialistPassword(@PathVariable UUID userId,
+                                                  @RequestBody @Valid ChangeCrmSpecialistPasswordDto dto){
+        service.changeCrmSpecialistPassword(userId, dto.getPassword());
+        return  ResponseEntity.ok().build();
+    }
 }

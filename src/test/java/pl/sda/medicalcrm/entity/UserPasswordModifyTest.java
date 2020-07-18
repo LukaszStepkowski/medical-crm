@@ -40,7 +40,7 @@ public class UserPasswordModifyTest {
     @Test
     void testDoctorPasswordModify() {
         //given
-        var doctor = new Doctor("login", "password", "Jan", "Kowalski", "123456789");
+        var doctor = new Doctor("login", "password", "1234567", "Jan", "Kowalski");
         repository.saveAndFlush(doctor);
         em.clear();
 
@@ -49,8 +49,25 @@ public class UserPasswordModifyTest {
         repository.flush();
 
         //then
-//        assertEquals(1, updated);
+        assertEquals(1, updated);
         var user = repository.findById(doctor.getId()).get();
         assertEquals("newDoctorPassword", user.getPassword());
+    }
+
+    @Test
+    void testCrmSpecialistPasswordModify() {
+        //given
+        var crm = new CrmSpecialist("login", "password", "Jan", "Kowalski");
+        repository.saveAndFlush(crm);
+        em.clear();
+
+        //when
+        int updated = repository.updateCrmSpecialistPassword(crm.getId(), "newCrmSpecialistPassword");
+        repository.flush();
+
+        //then
+        assertEquals(1, updated);
+        var user = repository.findById(crm.getId()).get();
+        assertEquals("newCrmSpecialistPassword", user.getPassword());
     }
 }
