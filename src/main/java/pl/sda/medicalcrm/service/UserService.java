@@ -40,7 +40,6 @@ public class UserService {
         return doctor.getId();
     }
 
-
     @Transactional
     public void changeDoctorEntity(UUID userId, String login, String password,String npwz, String name, String surname){
         repository.updateDoctorEntity(userId, login,password,npwz, name, surname); }
@@ -48,9 +47,6 @@ public class UserService {
     @Transactional
     public void changePatientEntity(UUID userId, String login, String password, String name, String surname, String pesel){
         repository.updatePatientEntity(userId,login,password,name,surname,pesel); }
-
-
-
 
     @Transactional
     public UUID createAdmin(CreateAdminDto dto) {
@@ -70,5 +66,9 @@ public class UserService {
         return patient.getId();
     }
 
+    @Transactional
+    public void changePatientPassword(UUID userId, String password){
+        repository.updatePatientPassword(userId,password);
+    }
 
 }
