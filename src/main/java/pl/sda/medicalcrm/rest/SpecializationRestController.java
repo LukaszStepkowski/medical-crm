@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.sda.medicalcrm.dto.SpecializationDto;
 import pl.sda.medicalcrm.dto.UserIdDto;
-import pl.sda.medicalcrm.service.SpecializationService;
+import pl.sda.medicalcrm.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,9 +16,9 @@ import java.util.UUID;
 
 public class SpecializationRestController {
 
-    private final SpecializationService service;
+    private final UserService service;
 
-    public SpecializationRestController(SpecializationService service) {
+    public SpecializationRestController(UserService service) {
         this.service = service;
     }
 
@@ -28,7 +28,7 @@ public class SpecializationRestController {
     @PostMapping(path = "/{userId}/specialization")
     ResponseEntity<UserIdDto> createSpecialization(@PathVariable UUID userId,
                                                    @RequestBody @Valid SpecializationDto dto){
-        service.crea(userId, dto.getTypeOfSpecialization());
+        service.cre(userId ,dto.getTypeOfSpecialization();
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();

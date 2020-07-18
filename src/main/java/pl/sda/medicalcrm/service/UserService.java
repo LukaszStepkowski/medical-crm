@@ -9,18 +9,17 @@ import pl.sda.medicalcrm.entity.Patient;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.UUID;
 
 @Service
-public class SpecializationService {
+public class UserService {
 
     private final UserRepository repository;
     private final UserMapper mapper;
 
 
 
-    public SpecializationService(UserRepository repository, UserMapper mapper) {
+    public UserService(UserRepository repository, UserMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.dto.*;
-import pl.sda.medicalcrm.service.SpecializationService;
+import pl.sda.medicalcrm.service.UserService;
 
 import javax.validation.Valid;
 import java.util.UUID;
@@ -13,9 +13,9 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserRestController {
 
-    private final SpecializationService service;
+    private final UserService service;
 
-    public UserRestController(SpecializationService service) {
+    public UserRestController(UserService service) {
         this.service = service;
     }
 

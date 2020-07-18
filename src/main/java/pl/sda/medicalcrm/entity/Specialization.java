@@ -1,9 +1,9 @@
 package pl.sda.medicalcrm.entity;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public class Specialization {
         return id;
     }
 
-    public String getTypeOfSpecialization() {
+    public List<Specialization> getTypeOfSpecialization() {
         return typeOfSpecialization;
     }
 
