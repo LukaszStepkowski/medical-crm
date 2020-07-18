@@ -22,14 +22,30 @@ public class SpecializationRestController {
         this.service = service;
     }
 
+
     @GetMapping(path = "/specializations")
-    List<SpecializationDto> listSpecializations() {
-        return service.listSpecialization();
-    }
+    List<SpecializationDto> listSpecializations(){return  service.listSpecialization();}
 
     @PostMapping(path = "/specializations")
-    ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto) {
+    ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto){
         Specialization specialization = service.createSpecialization(dto.getTypeOfSpecialization());
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .build();
+    }
+
+
+/*
+    @GetMapping(path = "/{doctorId}/specializations")
+    List<SpecializationDto> listSpecializations(@PathVariable UUID doctorId) {
+        return service.listSpecialization(doctorId);
+    }*/
+
+    @PostMapping(path = "/{doctorId/specializations")
+    ResponseEntity<UserIdDto> connectSpecializationDoctor(@PathVariable UUID doctorId,
+                                                          @RequestBody @Valid  SpecializationDto  dto) {
+
+        service.createSpecialization(doctorId,dto.getTypeOfSpecialization());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();
