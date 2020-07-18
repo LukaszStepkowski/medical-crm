@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserService {
+public class SpecializationService {
 
     private final UserRepository repository;
     private final UserMapper mapper;
 
 
 
-    public UserService(UserRepository repository, UserMapper mapper) {
+    public SpecializationService(UserRepository repository, UserMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -68,18 +68,7 @@ public class UserService {
 
 
 
-    @Transactional
-    public List<SpecializationDto> listSpecialization(UUID doctorId){
-        var doctor = repository.getOne(doctorId);
-                return mapper.mapSpecialization(listSpecialization().));
 
-    }
-    @Transactional
-    public void createSpecialization(UUID userId, String name, String surname, String type){
-        var specialization = repository.getOne(userId);
-        createDoctor(specialization.ge)
-
-    }
 
 
 }

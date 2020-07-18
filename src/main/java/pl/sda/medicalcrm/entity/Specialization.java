@@ -3,44 +3,30 @@ package pl.sda.medicalcrm.entity;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@DiscriminatorValue("specialization")
+@Table(name = "specializations")
 public class Specialization {
 
     @Id
     private UUID id;
-    String type;
-    String name;
-    String surname;
+    String typeOfSpecialization;
 
 
-    private Specialization(){}
-
-
-    public Specialization(String type, String name, String surname) {
+    public Specialization( String typeOfSpecialization) {
         this.id =UUID.randomUUID();
-        this.type = type;
-        this.name = name;
-        this.surname = surname;
+        this.typeOfSpecialization = typeOfSpecialization;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
+    public String getTypeOfSpecialization() {
+        return typeOfSpecialization;
     }
 
     @Override
@@ -48,14 +34,11 @@ public class Specialization {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Specialization that = (Specialization) o;
-        return id.equals(that.id) &&
-                type.equals(that.type) &&
-                name.equals(that.name) &&
-                surname.equals(that.surname);
+        return typeOfSpecialization.equals(that.typeOfSpecialization);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, name, surname);
+        return Objects.hash(typeOfSpecialization);
     }
 }

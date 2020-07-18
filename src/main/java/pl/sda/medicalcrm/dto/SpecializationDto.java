@@ -8,31 +8,19 @@ public class SpecializationDto {
 
     @Id
     private UUID id;
-    String type;
-    String name;
-    String surname;
+    String typeOfSpecialization;
 
-    public SpecializationDto(UUID id, String type, String name, String surname) {
+    public SpecializationDto(UUID id, String typeSpecialization) {
         this.id = id;
-        this.type = type;
-        this.name = name;
-        this.surname = surname;
+        this.typeOfSpecialization = typeSpecialization;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
+    public String getTypeOfSpecialization() {
+        return typeOfSpecialization;
     }
 
     @Override
@@ -41,13 +29,11 @@ public class SpecializationDto {
         if (o == null || getClass() != o.getClass()) return false;
         SpecializationDto that = (SpecializationDto) o;
         return id.equals(that.id) &&
-                type.equals(that.type) &&
-                name.equals(that.name) &&
-                surname.equals(that.surname);
+                typeOfSpecialization.equals(that.typeOfSpecialization);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, name, surname);
+        return Objects.hash(id, typeOfSpecialization);
     }
 }

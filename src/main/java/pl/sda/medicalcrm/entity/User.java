@@ -13,6 +13,7 @@ import java.util.UUID;
 @DiscriminatorColumn(name = "user_type")
 public abstract class User {
 
+
     @Id
     private UUID id;
     private String login;
