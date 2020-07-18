@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
-public class PatientPasswordModifyTest {
+public class UserPasswordModifyTest {
 
     @Autowired
     private UserRepository repository;
@@ -37,4 +37,20 @@ public class PatientPasswordModifyTest {
         assertEquals("newPassword", user.getPassword());
     }
 
+    @Test
+    void testDoctorPasswordModify() {
+        //given
+        var doctor = new Doctor("login", "password", "Jan", "Kowalski", "123456789");
+        repository.saveAndFlush(doctor);
+        em.clear();
+
+        //when
+        int updated = repository.updateDoctorPassword(doctor.getId(), "newDoctorPassword");
+        repository.flush();
+
+        //then
+//        assertEquals(1, updated);
+        var user = repository.findById(doctor.getId()).get();
+        assertEquals("newDoctorPassword", user.getPassword());
+    }
 }

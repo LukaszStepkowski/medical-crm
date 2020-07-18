@@ -72,4 +72,18 @@ public class UserRestController {
         service.changePatientPassword(userId, dto.getPassword());
         return  ResponseEntity.ok().build();
     }
+
+    @PutMapping(path = "/doctors/{userId}/password")
+    ResponseEntity<UserIdDto>changeDoctorPassword(@PathVariable UUID userId,
+                                                   @RequestBody @Valid ChangeDoctorPasswordDto dto){
+        service.changeDoctorPassword(userId, dto.getPassword());
+        return  ResponseEntity.ok().build();
+    }
+
+//    @PutMapping(path = "/crmspecialists/{userId}/password")
+//    ResponseEntity<UserIdDto>changeCrmSpecialistPassword(@PathVariable UUID userId,
+//                                                  @RequestBody @Valid ChangeCrmSpecialistPasswordDto dto){
+//        service.changeCrmSpecialistPassword(userId, dto.getPassword());
+//        return  ResponseEntity.ok().build();
+//    }
 }
