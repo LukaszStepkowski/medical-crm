@@ -1,3 +1,4 @@
+/*
 package pl.sda.medicalcrm.entity;
 
 import org.junit.jupiter.api.Test;
@@ -30,4 +31,4 @@ class SpecializationTest {
         assertEquals(readSpecialization, specialization);
     }
 
-}
+}*/

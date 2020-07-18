@@ -3,6 +3,7 @@ package pl.sda.medicalcrm.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -13,6 +14,7 @@ public class Specialization {
 
     @Id
     private UUID id;
+
     String typeOfSpecialization;
 
 
@@ -25,7 +27,7 @@ public class Specialization {
         return id;
     }
 
-    public List<Specialization> getTypeOfSpecialization() {
+    public String getTypeOfSpecialization() {
         return typeOfSpecialization;
     }
 

@@ -2,10 +2,7 @@ package pl.sda.medicalcrm.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.dto.SpecializationDto;
 import pl.sda.medicalcrm.dto.UserIdDto;
 import pl.sda.medicalcrm.entity.Specialization;
@@ -16,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@RestController
 public class SpecializationRestController {
 
     private final SpecializationService service;
@@ -26,10 +23,12 @@ public class SpecializationRestController {
     }
 
     @GetMapping(path = "/specializations")
-    List<SpecializationDto> listSpecializations(){return  service.listSpecialization()}
+    List<SpecializationDto> listSpecializations() {
+        return service.listSpecialization();
+    }
 
     @PostMapping(path = "/specializations")
-    ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto){
+    ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto) {
         Specialization specialization = service.createSpecialization(dto.getTypeOfSpecialization());
         return ResponseEntity
                 .status(HttpStatus.CREATED)

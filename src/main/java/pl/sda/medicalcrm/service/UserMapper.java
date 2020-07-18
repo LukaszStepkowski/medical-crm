@@ -1,5 +1,6 @@
 package pl.sda.medicalcrm.service;
 
+import org.springframework.stereotype.Component;
 import pl.sda.medicalcrm.dto.SpecializationDto;
 import pl.sda.medicalcrm.dto.UserQueryResultDto;
 import pl.sda.medicalcrm.entity.Doctor;
@@ -9,11 +10,8 @@ import pl.sda.medicalcrm.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class UserMapper {
-
-
-
 
 
     public UserQueryResultDto map(User user) {

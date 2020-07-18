@@ -18,7 +18,6 @@ public class UserService {
     private final UserMapper mapper;
 
 
-
     public UserService(UserRepository repository, UserMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
@@ -38,23 +37,24 @@ public class UserService {
         repository.save(crmSpecialist);
         return crmSpecialist.getId();
     }
+
     @Transactional
     public UUID createDoctor(CreateDoctorDto dto) {
-        var doctor =new Doctor(dto.getLogin(), dto.getPassword(),dto.getNpwz(), dto.getName(), dto.getSurname());
+        var doctor = new Doctor(dto.getLogin(), dto.getPassword(), dto.getNpwz(), dto.getName(), dto.getSurname());
         repository.save(doctor);
         return doctor.getId();
     }
 
 
     @Transactional
-    public void changeDoctorEntity(UUID userId, String login, String password,String npwz, String name, String surname){
-        repository.updateDoctorEntity(userId, login,password,npwz, name, surname); }
+    public void changeDoctorEntity(UUID userId, String login, String password, String npwz, String name, String surname) {
+        repository.updateDoctorEntity(userId, login, password, npwz, name, surname);
+    }
 
     @Transactional
-    public void changePatientEntity(UUID userId, String login, String password, String name, String surname, String pesel){
-        repository.updatePatientEntity(userId,login,password,name,surname,pesel); }
-
-
+    public void changePatientEntity(UUID userId, String login, String password, String name, String surname, String pesel) {
+        repository.updatePatientEntity(userId, login, password, name, surname, pesel);
+    }
 
 
     @Transactional
@@ -63,11 +63,6 @@ public class UserService {
         repository.save(admin);
         return admin.getId();
     }
-
-
-
-
-
 
 
 }

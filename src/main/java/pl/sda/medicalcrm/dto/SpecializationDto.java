@@ -1,6 +1,12 @@
 package pl.sda.medicalcrm.dto;
 
+import pl.sda.medicalcrm.entity.Specialization;
+
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -8,11 +14,14 @@ public class SpecializationDto {
 
     @Id
     private UUID id;
+    @NotEmpty
+    @NotBlank
+
     String typeOfSpecialization;
 
-    public SpecializationDto(UUID id, String typeSpecialization) {
+    public SpecializationDto(UUID id, String typeOfSpecialization) {
         this.id = id;
-        this.typeOfSpecialization = typeSpecialization;
+        this.typeOfSpecialization = typeOfSpecialization;
     }
 
     public UUID getId() {
@@ -28,12 +37,11 @@ public class SpecializationDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SpecializationDto that = (SpecializationDto) o;
-        return id.equals(that.id) &&
-                typeOfSpecialization.equals(that.typeOfSpecialization);
+        return Objects.equals(typeOfSpecialization, that.typeOfSpecialization);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, typeOfSpecialization);
+        return Objects.hash(typeOfSpecialization);
     }
 }
