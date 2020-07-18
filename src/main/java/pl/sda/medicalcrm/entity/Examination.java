@@ -1,6 +1,8 @@
 package pl.sda.medicalcrm.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,17 +15,18 @@ public class Examination {
     private UUID id;
     private String type;
     private String result;
-    private String picturePath;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Picture> picturePath;
     private String description;
 
     public Examination() {
     }
 
-    public Examination(UUID id, String type, String result, String picturePath, String description) {
+    public Examination(UUID id, String type, String result, String description) {
         this.id = id;
         this.type = type;
         this.result = result;
-        this.picturePath = picturePath;
+        this.picturePath = new ArrayList<>();
         this.description = description;
     }
 
@@ -39,8 +42,14 @@ public class Examination {
         return result;
     }
 
-    public String getPicturePath() {
-        return picturePath;
+    public void addPicture(Picture picture) {
+        if (!picturePath.contains(picture)){
+            picturePath.add(picture);
+        }
+    }
+
+    public List<Picture> getPicturePath() {
+        return new ArrayList<>(picturePath);
     }
 
     public String getDescription() {
