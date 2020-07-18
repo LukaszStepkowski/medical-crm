@@ -1,10 +1,7 @@
 package pl.sda.medicalcrm.service;
 
 import org.springframework.stereotype.Service;
-import pl.sda.medicalcrm.dto.CreateAdminDto;
-import pl.sda.medicalcrm.dto.CreateCrmSpecialistDto;
-import pl.sda.medicalcrm.dto.CreateDoctorDto;
-import pl.sda.medicalcrm.dto.CreatePatientDto;
+import pl.sda.medicalcrm.dto.*;
 import pl.sda.medicalcrm.entity.Admin;
 import pl.sda.medicalcrm.entity.CrmSpecialist;
 import pl.sda.medicalcrm.entity.Doctor;
@@ -12,15 +9,20 @@ import pl.sda.medicalcrm.entity.Patient;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class UserService {
 
     private final UserRepository repository;
+    private final UserMapper mapper;
 
-    public UserService (UserRepository repository) {
+
+
+    public UserService(UserRepository repository, UserMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Transactional
@@ -62,4 +64,22 @@ public class UserService {
         repository.save(admin);
         return admin.getId();
     }
+
+
+
+
+    @Transactional
+    public List<SpecializationDto> listSpecialization(UUID doctorId){
+        var doctor = repository.getOne(doctorId);
+                return mapper.mapSpecialization(listSpecialization().));
+
+    }
+    @Transactional
+    public void createSpecialization(UUID userId, String name, String surname, String type){
+        var specialization = repository.getOne(userId);
+        createDoctor(specialization.ge)
+
+    }
+
+
 }

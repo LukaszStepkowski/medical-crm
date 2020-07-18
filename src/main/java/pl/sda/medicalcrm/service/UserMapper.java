@@ -1,26 +1,27 @@
 package pl.sda.medicalcrm.service;
 
-import org.springframework.stereotype.Component;
+import pl.sda.medicalcrm.dto.SpecializationDto;
 import pl.sda.medicalcrm.dto.UserQueryResultDto;
 import pl.sda.medicalcrm.entity.Doctor;
+import pl.sda.medicalcrm.entity.Specialization;
 import pl.sda.medicalcrm.entity.User;
 
-import java.lang.annotation.Documented;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 
 public class UserMapper {
 
 
-    List<UserQueryResultDto>map(List<User> users) {
+    List<SpecializationDto> mapSpecialization(List<Specialization> specializations) {
 
-        List<UserQueryResultDto> list = new ArrayList<>();
-        for (User user : users) {
-            UserQueryResultDto map = map(user);
-            list.add(map);
-        }
-        return list;
+        return specializations.stream()
+                .map(specialization -> new SpecializationDto(specialization.getId(),
+                        specialization.getType(), specialization.getName(), specialization.getSurname()))
+                .collect(toList());
     }
 
 

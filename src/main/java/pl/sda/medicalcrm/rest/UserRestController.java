@@ -7,6 +7,7 @@ import pl.sda.medicalcrm.dto.*;
 import pl.sda.medicalcrm.service.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -66,4 +67,15 @@ public class UserRestController {
                 .body(new UserIdDto(id));
     }
 
+    @GetMapping(path = "/{userid}/doctors")
+    List<SpecializationDto>listSpecializations(@PathVariable UUID userId){return  service.listSpecialization(userId);}
+
+    @PostMapping(path = "/{userId}/specialization")
+    ResponseEntity<void>createSpecialization(@PathVariable UUID userId,
+                                             @RequestBody @Valid SpecializationDto dto){
+    service.listSpecialization(userId, dto.getName(), dto.getSurname(), dto.getType());
+    return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .build();
+    }
 }

@@ -4,7 +4,10 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 
 @Entity
@@ -16,6 +19,10 @@ public class Doctor extends User {
     private String name;
     private String surname;
 
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Specialization>specializations;
+
     public Doctor(){
     }
 
@@ -25,6 +32,7 @@ public class Doctor extends User {
         this.npwz = npwz;
         this.name = name;
         this.surname = surname;
+        this.specializations=new ArrayList<>();
 
     }
 
@@ -33,6 +41,23 @@ public class Doctor extends User {
     public String getName() { return name; }
 
     public String getSurname() { return surname; }
+
+    public void addSpecialization(Specialization specialization){
+
+        if(!specializations.contains(specialization)){
+            specializations.add(specialization);
+        }
+
+    }
+
+    public void removeSpecialization(UUID specializationId){
+        specializations.stream()
+                .filter(specialization -> specialization.getId().equals(specializationId))
+                .findFirst()
+                .ifPresent(specialization -> specializations.remove(specialization));
+    }
+
+    public List<Specialization> getSpecializations(){return  new ArrayList<>(specializations);}
 
     @Override
     public boolean equals(Object o) {
