@@ -2,6 +2,8 @@ package pl.sda.medicalcrm.entity;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -10,6 +12,7 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_type")
 public abstract class User {
+
 
     @Id
     private UUID id;
@@ -51,4 +54,8 @@ public abstract class User {
     public int hashCode() {
         return Objects.hash(id, login, password);
     }
+
+
 }
+
+

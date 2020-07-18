@@ -5,7 +5,6 @@ create table users (
     name varchar(255),
     pesel varchar (11),
     npwz varchar(7),
-    specialization varchar (255),
     surname varchar(255),
     user_type varchar(30),
     primary key (id));
