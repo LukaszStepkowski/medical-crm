@@ -14,7 +14,10 @@ public class Specialization {
     @Id
     private UUID id;
 
-    String typeOfSpecialization;
+    private String typeOfSpecialization;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Doctor> doctors;
 
     public Specialization() {
     }
@@ -32,17 +35,28 @@ public class Specialization {
         return typeOfSpecialization;
     }
 
+    public void addDoctor(Doctor doctor){
+        if (!doctors.contains(doctor)){
+            doctors.add(doctor);
+        }
+    }
+
+    public List<Doctor> getDoctors() {
+        return new ArrayList<>(doctors);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Specialization that = (Specialization) o;
         return id.equals(that.id) &&
-                typeOfSpecialization.equals(that.typeOfSpecialization);
+                typeOfSpecialization.equals(that.typeOfSpecialization) &&
+                Objects.equals(doctors, that.doctors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, typeOfSpecialization);
+        return Objects.hash(id, typeOfSpecialization, doctors);
     }
 }

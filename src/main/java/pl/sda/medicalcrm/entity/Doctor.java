@@ -19,10 +19,6 @@ public class Doctor extends User {
     private String name;
     private String surname;
 
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Specialization> specializations;
-
     public Doctor() {
     }
 
@@ -32,8 +28,6 @@ public class Doctor extends User {
         this.npwz = npwz;
         this.name = name;
         this.surname = surname;
-        this.specializations = new ArrayList<>();
-
     }
 
     public String getNpwz() {
@@ -46,25 +40,6 @@ public class Doctor extends User {
 
     public String getSurname() {
         return surname;
-    }
-
-    public void addSpecialization(Specialization specialization) {
-
-        if (!specializations.contains(specialization)) {
-            specializations.add(specialization);
-        }
-
-    }
-
-    public void removeSpecialization(UUID specializationId) {
-        specializations.stream()
-                .filter(specialization -> specialization.getId().equals(specializationId))
-                .findFirst()
-                .ifPresent(specialization -> specializations.remove(specialization));
-    }
-
-    public List<Specialization> getSpecializations() {
-        return new ArrayList<>(specializations);
     }
 
     @Override

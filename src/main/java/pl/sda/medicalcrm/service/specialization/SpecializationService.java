@@ -28,7 +28,7 @@ public class SpecializationService {
     }
 
     public List<SpecializationDto> listSpecialization() {
-        return mapper.mapSpecialization(repository.findAll());
+            return mapper.mapSpecialization(repository.findAll());
     }
 
 }
