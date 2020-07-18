@@ -4,6 +4,8 @@ package pl.sda.medicalcrm.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +17,7 @@ public class Appointment {
 
     @Id
     private UUID id;
-    private Date date;
+    private LocalDateTime date;
     private String patient;
     private String specialization;
     private List<String> examinations;
@@ -23,7 +25,7 @@ public class Appointment {
     private boolean isOnline;
     private String prescription;
 
-    public Appointment(UUID id, Date date, String patient, String specialization,
+    public Appointment(UUID id, LocalDateTime date, String patient, String specialization,
                        List<String> examinations, String clinic, boolean isOnline, String prescription) {
         this.id = id;
         this.date = date;
@@ -39,7 +41,7 @@ public class Appointment {
         return id;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
