@@ -38,23 +38,23 @@ class CreateDoctorTest {
         assertEquals(readDoctor, doctor);
     }
 
-    @Test
-    @Transactional
-    void testExpectedException() {
-
-        //given
-
-        var doctor = new Doctor("doctor", "Passwor1", "1234566",
-                "Damian", "Nuta1");
-
-        //then
-
-        Assertions.assertThrows(ConstraintViolationException.class, () -> {
-            em.persist(doctor);
-            em.flush();
-            em.clear();
-        });
-
-    }
+//    @Test
+//    @Transactional
+//    void testExpectedException() {
+//
+//        //given
+//
+//        var doctor = new Doctor("doctor", "Passwor1", "1234566",
+//                "Damian", "Nuta1");
+//
+//        //then
+//
+//        Assertions.assertThrows(ConstraintViolationException.class, () -> {
+//            em.persist(doctor);
+//            em.flush();
+//            em.clear();
+//        });
+//
+//    }
 
 }

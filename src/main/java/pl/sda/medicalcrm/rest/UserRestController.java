@@ -66,7 +66,7 @@ public class UserRestController {
                 .body(new UserIdDto(id));
     }
 
-    @PutMapping(path = "/patients/{userId}")
+    @PutMapping(path = "/patients/{userId}/password")
     ResponseEntity<UserIdDto>changePatientPassword(@PathVariable UUID userId,
                                                  @RequestBody @Valid ChangePatientPasswordDto dto){
         service.changePatientPassword(userId, dto.getPassword());
