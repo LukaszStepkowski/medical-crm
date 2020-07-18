@@ -1,5 +1,7 @@
 package pl.sda.medicalcrm.rest;
 
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,14 @@ public class UserRestController {
     @PostMapping (path = "/patients")
     ResponseEntity<UserIdDto> createPatient(@RequestBody @Valid CreatePatientDto dto) {
         var id = service.createPatient(dto);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new UserIdDto(id));
+    }
+
+    @PostMapping (path = "/patientsWithEmail")
+    ResponseEntity<UserIdDto> createPatientWithSendingEmail(@RequestBody @Valid CreatePatientDto dto) throws MailjetSocketTimeoutException, MailjetException {
+        var id = service.createPatientWithSendingEmail(dto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new UserIdDto(id));
@@ -66,21 +76,21 @@ public class UserRestController {
                 .body(new UserIdDto(id));
     }
 
-    @PutMapping(path = "/patients/{userId}/password")
+    @PatchMapping(path = "/patients/{userId}/password")
     ResponseEntity<UserIdDto>changePatientPassword(@PathVariable UUID userId,
                                                  @RequestBody @Valid ChangePatientPasswordDto dto){
         service.changePatientPassword(userId, dto.getPassword());
         return  ResponseEntity.ok().build();
     }
 
-    @PutMapping(path = "/doctors/{userId}/password")
+    @PatchMapping(path = "/doctors/{userId}/password")
     ResponseEntity<UserIdDto>changeDoctorPassword(@PathVariable UUID userId,
                                                    @RequestBody @Valid ChangeDoctorPasswordDto dto){
         service.changeDoctorPassword(userId, dto.getPassword());
         return  ResponseEntity.ok().build();
     }
 
-    @PutMapping(path = "/crmspecialists/{userId}/password")
+    @PatchMapping(path = "/crmspecialists/{userId}/password")
     ResponseEntity<UserIdDto>changeCrmSpecialistPassword(@PathVariable UUID userId,
                                                   @RequestBody @Valid ChangeCrmSpecialistPasswordDto dto){
         service.changeCrmSpecialistPassword(userId, dto.getPassword());
