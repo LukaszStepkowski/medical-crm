@@ -1,6 +1,6 @@
 create table specializations (
     id binary not null,
-    typeOfSpecialization varchar(255),
+    type_of_specialization varchar(255),
     primary key (id));
 
 

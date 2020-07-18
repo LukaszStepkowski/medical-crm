@@ -23,6 +23,9 @@ public class Specialization {
         this.typeOfSpecialization = typeOfSpecialization;
     }
 
+
+    public Specialization(){}
+
     public UUID getId() {
         return id;
     }
