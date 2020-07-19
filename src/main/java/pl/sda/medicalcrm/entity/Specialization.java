@@ -54,7 +54,7 @@ public class Specialization {
         Specialization that = (Specialization) o;
         return id.equals(that.id) &&
                 typeOfSpecialization.equals(that.typeOfSpecialization) &&
-                doctors.equals(that.doctors);
+                doctors.containsAll(that.doctors);
     }
 
     @Override
