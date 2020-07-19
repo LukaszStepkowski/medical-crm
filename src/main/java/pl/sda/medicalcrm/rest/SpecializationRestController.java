@@ -21,16 +21,16 @@ public class SpecializationRestController {
     }
 
 
-    @GetMapping(path = "/specializations")
-    List<SpecializationDto> listSpecializations(){return  service.listSpecialization();}
-
-    @PostMapping(path = "/specializations")
-    ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto){
-        Specialization specialization = service.connectSpecializationDoctor(dto.getTypeOfSpecialization());
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .build();
-    }
+//    @GetMapping(path = "/specializations")
+//    List<SpecializationDto> listSpecializations(){return  service.listSpecialization();}
+//
+//    @PostMapping(path = "/specializations")
+//    ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto){
+//        Specialization specialization = service.connectSpecializationDoctor(dto.getTypeOfSpecialization());
+//        return ResponseEntity
+//                .status(HttpStatus.CREATED)
+//                .build();
+//    }
 
 
 /*
@@ -39,13 +39,13 @@ public class SpecializationRestController {
         return service.listSpecialization(doctorId);
     }*/
 
-    @PostMapping(path = "/{doctorId/specializations")
-    ResponseEntity<UserIdDto> connectSpecializationDoctor(@PathVariable UUID doctorId,
-                                                          @RequestBody @Valid  SpecializationDto  dto) {
-
-        service.connectSpecializationDoctor(doctorId,dto.getTypeOfSpecialization());
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .build();
-    }
+//    @PostMapping(path = "/{doctorId/specializations")
+//    ResponseEntity<UserIdDto> connectSpecializationDoctor(@PathVariable UUID doctorId,
+//                                                          @RequestBody @Valid  SpecializationDto  dto) {
+//
+//        service.connectSpecializationDoctor(doctorId,dto.getTypeOfSpecialization());
+//        return ResponseEntity
+//                .status(HttpStatus.CREATED)
+//                .build();
+//    }
 }
