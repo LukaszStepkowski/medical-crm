@@ -2,7 +2,6 @@ package pl.sda.medicalcrm.entity;
 
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -30,17 +29,16 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(UUID id, LocalDateTime date, Patient patient, Specialization specialization,
-                       String clinic, boolean isOnline, String prescription) {
-        this.id = id;
+    public Appointment(LocalDateTime date, String clinic, boolean isOnline, String prescription) {
+        this.id = UUID.randomUUID();
         this.date = date;
-        this.patient = patient;
-        this.specialization = specialization;
-        this.examinations = new ArrayList<>();
         this.clinic = clinic;
         this.isOnline = isOnline;
         this.prescription = prescription;
     }
+
+
+
 
     public UUID getId() {
         return id;

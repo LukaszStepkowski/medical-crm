@@ -15,8 +15,8 @@ public class Picture {
     public Picture() {
     }
 
-    public Picture(UUID id, String picturePath) {
-        this.id = id;
+    public Picture(String picturePath) {
+        this.id = UUID.randomUUID();
         this.picturePath = picturePath;
     }
 

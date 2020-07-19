@@ -22,8 +22,8 @@ public class Examination {
     public Examination() {
     }
 
-    public Examination(UUID id, String type, String result, String description) {
-        this.id = id;
+    public Examination(String type, String result, String description) {
+        this.id = UUID.randomUUID();
         this.type = type;
         this.result = result;
         this.picturePath = new ArrayList<>();
