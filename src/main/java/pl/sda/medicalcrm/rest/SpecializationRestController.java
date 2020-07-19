@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.dto.SpecializationDto;
 import pl.sda.medicalcrm.dto.UserIdDto;
 import pl.sda.medicalcrm.entity.Specialization;
-import pl.sda.medicalcrm.service.UserService;
 import pl.sda.medicalcrm.service.specialization.SpecializationService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 @RestController
 public class SpecializationRestController {
@@ -22,14 +20,30 @@ public class SpecializationRestController {
         this.service = service;
     }
 
+
     @GetMapping(path = "/specializations")
-    List<SpecializationDto> listSpecializations() {
-        return service.listSpecialization();
-    }
+    List<SpecializationDto> listSpecializations(){return  service.listSpecialization();}
 
     @PostMapping(path = "/specializations")
-    ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto) {
-        Specialization specialization = service.createSpecialization(dto.getTypeOfSpecialization());
+    ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto){
+        Specialization specialization = service.connectSpecializationDoctor(dto.getTypeOfSpecialization());
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .build();
+    }
+
+
+/*
+    @GetMapping(path = "/{doctorId}/specializations")
+    List<SpecializationDto> listSpecializations(@PathVariable UUID doctorId) {
+        return service.listSpecialization(doctorId);
+    }*/
+
+    @PostMapping(path = "/{doctorId/specializations")
+    ResponseEntity<UserIdDto> connectSpecializationDoctor(@PathVariable UUID doctorId,
+                                                          @RequestBody @Valid  SpecializationDto  dto) {
+
+        service.connectSpecializationDoctor(doctorId,dto.getTypeOfSpecialization());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();
