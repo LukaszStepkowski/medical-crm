@@ -27,7 +27,6 @@ public class AppointmentService {
         var appointment = new Appointment(dto.getAppointmentDate(), patient, specialization, clinic, dto.isOnline(), prescription);
         repository.save(appointment);
         return appointment.getId();
-
     }
 
 

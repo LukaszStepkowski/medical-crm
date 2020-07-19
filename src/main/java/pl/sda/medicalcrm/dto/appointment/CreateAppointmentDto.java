@@ -11,9 +11,6 @@ import java.util.UUID;
 public class CreateAppointmentDto {
 
 
-    @Id
-    private UUID id;
-
     @NotEmpty
     @NotBlank
     private LocalDateTime appointmentDate;
@@ -22,14 +19,9 @@ public class CreateAppointmentDto {
     @NotBlank
     private boolean isOnline;
 
-    public CreateAppointmentDto(UUID id, @NotEmpty @NotBlank LocalDateTime appointmentDate, @NotEmpty @NotBlank boolean isOnline) {
-        this.id = id;
+    public CreateAppointmentDto(@NotEmpty @NotBlank LocalDateTime appointmentDate, @NotEmpty @NotBlank boolean isOnline) {
         this.appointmentDate = appointmentDate;
         this.isOnline = isOnline;
-    }
-
-    public UUID getId() {
-        return id;
     }
 
     public LocalDateTime getAppointmentDate() {
@@ -46,12 +38,11 @@ public class CreateAppointmentDto {
         if (o == null || getClass() != o.getClass()) return false;
         CreateAppointmentDto that = (CreateAppointmentDto) o;
         return isOnline == that.isOnline &&
-                id.equals(that.id) &&
                 appointmentDate.equals(that.appointmentDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, appointmentDate, isOnline);
+        return Objects.hash(appointmentDate, isOnline);
     }
 }
