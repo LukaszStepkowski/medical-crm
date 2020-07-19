@@ -9,6 +9,8 @@ create table examinations (
 create table appointments (
     id binary not null,
     appointment_date datetime not null,
+    patient_id binary not null,
+    specialization_id binary not null,
     clinic varchar(255) not null,
     is_online boolean not null,
     prescription varchar(255) not null,

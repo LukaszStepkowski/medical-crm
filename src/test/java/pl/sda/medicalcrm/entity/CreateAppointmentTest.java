@@ -1,5 +1,6 @@
 package pl.sda.medicalcrm.entity;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,10 +28,9 @@ public class CreateAppointmentTest {
         em.persist(appointment);
         em.flush();
         em.clear();
-        var readAppointment = em.find(Appointment.class, appointment.getId());
+        var readAppointment = em.find(Appointment.class,appointment.getId());
 
         //then
-//            Assertions.assertEquals(readAppointment, appointment);
-
-    }
+        Assertions.assertEquals(readAppointment.getId(), appointment.getId());
+        }
 }
