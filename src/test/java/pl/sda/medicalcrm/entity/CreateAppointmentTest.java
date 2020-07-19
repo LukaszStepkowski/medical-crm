@@ -21,8 +21,11 @@ public class CreateAppointmentTest {
         //given
         var patient = new Patient("login", "password", "Jan", "Kowalski", "123456789");
         var specialization = new Specialization("kardiolog");
+        var address = new Address("street", "city", "zipCode", "Poland");
         LocalDateTime date = LocalDateTime.now();
-        var appointment = new Appointment(date, patient, specialization, "MedicalClinic", false, "prescriptionText");
+        var clinic = new Clinic(address);
+        var prescription = new Prescription(1234, "description");
+        var appointment = new Appointment(date, patient, specialization, clinic, false, prescription);
 
         //when
         em.persist(appointment);
