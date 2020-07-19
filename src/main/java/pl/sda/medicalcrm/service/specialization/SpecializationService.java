@@ -2,8 +2,10 @@ package pl.sda.medicalcrm.service.specialization;
 
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.dto.SpecializationDto;
+import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.Specialization;
 import pl.sda.medicalcrm.repository.SpecializationRepository;
+import pl.sda.medicalcrm.repository.UserRepository;
 
 
 import javax.transaction.Transactional;
@@ -22,7 +24,7 @@ public class SpecializationService {
 
 
     @Transactional
-    public Specialization createSpecialization (String typeOfSpecialization){
+    public Specialization connectSpecializationDoctor(String typeOfSpecialization){
         var specialization = new Specialization(typeOfSpecialization);
         return repository.save(specialization);
     }
@@ -35,13 +37,11 @@ public class SpecializationService {
 
 
     @Transactional
-    public void createSpecialization(UUID doctorId, String typeOfSpecialization) {
-        var specialization = repository.findAll();
-        //var specialization = new Specialization(typeOfSpecialization);
-        var doctor = repository.getOne(doctorId);
-        doctor.getTypeOfSpecialization();
-
-        repository.save(doctor);
+    public void connectSpecializationDoctor(UUID doctorId, UUID specializationId ) {
+        var specialization = repository.findById();
+        Doctor doctor = (Doctor) UserRepository.getOne(doctorId);
+        doctor.addSpecialization(specialization);
+        UserRepository.save(doctor);
 
     }
 

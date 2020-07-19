@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.dto.SpecializationDto;
 import pl.sda.medicalcrm.dto.UserIdDto;
 import pl.sda.medicalcrm.entity.Specialization;
-import pl.sda.medicalcrm.service.UserService;
 import pl.sda.medicalcrm.service.specialization.SpecializationService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 @RestController
 public class SpecializationRestController {
@@ -28,7 +26,7 @@ public class SpecializationRestController {
 
     @PostMapping(path = "/specializations")
     ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto){
-        Specialization specialization = service.createSpecialization(dto.getTypeOfSpecialization());
+        Specialization specialization = service.connectSpecializationDoctor(dto.getTypeOfSpecialization());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();
@@ -45,7 +43,7 @@ public class SpecializationRestController {
     ResponseEntity<UserIdDto> connectSpecializationDoctor(@PathVariable UUID doctorId,
                                                           @RequestBody @Valid  SpecializationDto  dto) {
 
-        service.createSpecialization(doctorId,dto.getTypeOfSpecialization());
+        service.connectSpecializationDoctor(doctorId,dto.getTypeOfSpecialization());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();

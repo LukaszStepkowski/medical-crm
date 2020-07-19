@@ -19,9 +19,11 @@ public class Doctor extends User {
     private String name;
     private String surname;
 
+/*
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Specialization> specializations;
+*/
 
     public Doctor() {
     }
@@ -32,7 +34,6 @@ public class Doctor extends User {
         this.npwz = npwz;
         this.name = name;
         this.surname = surname;
-        this.specializations = new ArrayList<>();
 
     }
 
@@ -48,7 +49,7 @@ public class Doctor extends User {
         return surname;
     }
 
-    public void addSpecialization(Specialization specialization) {
+    /*public void addSpecialization(Specialization specialization) {
 
         if (!specializations.contains(specialization)) {
             specializations.add(specialization);
@@ -65,7 +66,7 @@ public class Doctor extends User {
 
     public List<Specialization> getSpecializations() {
         return new ArrayList<>(specializations);
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {

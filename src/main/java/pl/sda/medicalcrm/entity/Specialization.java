@@ -23,6 +23,7 @@ public class Specialization {
     }
 
 
+
     public Specialization(){}
 
     public UUID getId() {
