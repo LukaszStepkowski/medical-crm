@@ -22,15 +22,19 @@ public class Appointment {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Examination> examinations;
 
-    private String clinic;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Clinic clinic;
+
     private boolean isOnline;
-    private String prescription;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Prescription prescription;
 
     public Appointment() {
     }
 
     public Appointment(LocalDateTime appointmentDate, Patient patient, Specialization specialization,
-                       String clinic, boolean isOnline, String prescription) {
+                       Clinic clinic, boolean isOnline, Prescription prescription) {
         this.id = UUID.randomUUID();
         this.appointmentDate = appointmentDate;
         this.patient = patient;
@@ -67,7 +71,7 @@ public class Appointment {
         return new ArrayList<>(examinations);
     }
 
-    public String getClinic() {
+    public Clinic getClinic() {
         return clinic;
     }
 
@@ -75,7 +79,7 @@ public class Appointment {
         return isOnline;
     }
 
-    public String getPrescription() {
+    public Prescription getPrescription() {
         return prescription;
     }
 

@@ -20,7 +20,6 @@ public class SpecializationRestController {
         this.service = service;
     }
 
-
     @GetMapping(path = "/specializations")
     List<SpecializationDto> listSpecializations(){return  service.listSpecialization();}
 
@@ -31,7 +30,6 @@ public class SpecializationRestController {
                 .status(HttpStatus.CREATED)
                 .build();
     }
-
 
 /*
     @GetMapping(path = "/{doctorId}/specializations")
