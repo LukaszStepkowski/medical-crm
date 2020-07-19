@@ -4,12 +4,14 @@ import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.dto.SpecializationDto;
 import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.Specialization;
+import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.repository.SpecializationRepository;
 import pl.sda.medicalcrm.repository.UserRepository;
 import pl.sda.medicalcrm.service.UserMapper;
 
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,14 +42,16 @@ public class SpecializationService {
 
 
     @Transactional
-    public void connectSpecializationDoctor(UUID doctorId, UUID specializationId) {
-        specializationRepository.findById(specializationId).ifPresent(specialization -> userRepository.findById(doctorId)
-                .ifPresent(user -> addDoctorToSpecialization(specialization, (Doctor) user)));
+    public void connectSpecializationDoctor(UUID userId, UUID specializationId) {
+        specializationRepository.findById(specializationId).ifPresent(specialization -> userRepository.findById(userId)
+                .ifPresent(user -> addDoctorToSpecialization(specialization,  user)));
     }
 
     @Transactional
-    private void addDoctorToSpecialization(Specialization specialization, Doctor doctor) {
-        specialization.addDoctor(doctor);
+    private void addDoctorToSpecialization(Specialization specialization, User user) {
+
+
+        specialization.addDoctor(user);
         specializationRepository.save(specialization);
     }
 }

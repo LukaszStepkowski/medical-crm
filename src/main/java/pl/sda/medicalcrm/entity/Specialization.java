@@ -17,7 +17,8 @@ public class Specialization {
     private String typeOfSpecialization;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Doctor> doctors;
+    private List<User> doctors;
+
 
     public Specialization() {
     }
@@ -25,6 +26,7 @@ public class Specialization {
     public Specialization(String typeOfSpecialization) {
         this.id =UUID.randomUUID();
         this.typeOfSpecialization = typeOfSpecialization;
+        this.doctors = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -35,20 +37,15 @@ public class Specialization {
         return typeOfSpecialization;
     }
 
-    public void addDoctor(Doctor doctor){
-        if (!doctors.contains(doctor)){
-            doctors.add(doctor);
-        }
+    public void addDoctor(User user){
+         if (!doctors.contains(user)){
+             doctors.add(user);
+         }
     }
 
-    public List<Doctor> getDoctors() {
-        return new ArrayList<>(doctors);
+    public List<User> getDoctors() {
+        return doctors;
     }
-
-
-
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -57,7 +54,7 @@ public class Specialization {
         Specialization that = (Specialization) o;
         return id.equals(that.id) &&
                 typeOfSpecialization.equals(that.typeOfSpecialization) &&
-                Objects.equals(doctors, that.doctors);
+                doctors.equals(that.doctors);
     }
 
     @Override

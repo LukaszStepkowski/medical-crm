@@ -12,6 +12,8 @@ import pl.sda.medicalcrm.service.UserService;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -38,7 +40,7 @@ class SpecializationServiceTest {
 
         specialization.addDoctor(doctor);
 
-        /*//when
+        //when
         em.persist(specialization);
         em.flush();
         em.clear();
@@ -47,7 +49,8 @@ class SpecializationServiceTest {
 
         //then
 
-        assertEquals(readSpecialization,specialization);*/
+        assertEquals(readSpecialization,specialization);
+        assertEquals(readSpecialization.getDoctors().get(0), doctor);
 
 
 

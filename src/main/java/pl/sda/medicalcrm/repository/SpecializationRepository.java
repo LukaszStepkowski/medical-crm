@@ -15,6 +15,6 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
     List<Specialization> findAll();
 
 
-    Optional <Specialization> findById(String specializationId);
+    Optional <Specialization> findById(UUID specializationId);
 
 }
