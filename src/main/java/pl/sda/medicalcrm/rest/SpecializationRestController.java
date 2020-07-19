@@ -26,7 +26,7 @@ public class SpecializationRestController {
 
     @PostMapping(path = "/specializations")
     ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto){
-        Specialization specialization = service.connectSpecializationDoctor(dto.getTypeOfSpecialization());
+        Specialization specialization = service.createSpecialization(dto.getTypeOfSpecialization());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();
@@ -41,9 +41,9 @@ public class SpecializationRestController {
 
     @PostMapping(path = "/{doctorId/specializations")
     ResponseEntity<UserIdDto> connectSpecializationDoctor(@PathVariable UUID doctorId,
-                                                          @RequestBody @Valid  SpecializationDto  dto) {
+                                                          @RequestBody @Valid  UUID specializationId) {
 
-        service.connectSpecializationDoctor(doctorId,dto.getTypeOfSpecialization());
+        service.connectSpecializationDoctor(doctorId,specializationId);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();

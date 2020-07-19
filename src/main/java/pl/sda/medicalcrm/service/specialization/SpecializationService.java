@@ -4,65 +4,50 @@ import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.dto.SpecializationDto;
 import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.Specialization;
-import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.repository.SpecializationRepository;
 import pl.sda.medicalcrm.repository.UserRepository;
 import pl.sda.medicalcrm.service.UserMapper;
 
 
-import javax.print.Doc;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class SpecializationService {
-    private final SpecializationRepository repository;
-    private final SpecializationMapper mapper;
+    private final SpecializationRepository specializationRepository;
+    private final SpecializationMapper specializationMapper;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
 
     public SpecializationService(SpecializationRepository repository, SpecializationMapper mapper, UserRepository userRepository, UserMapper userMapper) {
-        this.repository = repository;
-        this.mapper = mapper;
+        this.specializationRepository = repository;
+        this.specializationMapper = mapper;
         this.userRepository = userRepository;
         this.userMapper = userMapper;
-    }
-
-    public SpecializationService(SpecializationRepository repository, SpecializationMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
     }
 
     @Transactional
     public Specialization createSpecialization(String typeOfSpecialization) {
         var specialization = new Specialization(typeOfSpecialization);
-        return repository.save(specialization);
+        return specializationRepository.save(specialization);
     }
 
     public List<SpecializationDto> listSpecialization() {
-        return mapper.mapSpecialization(repository.findAll());
+        return specializationMapper.mapSpecialization(specializationRepository.findAll());
     }
-
-
-
 
 
     @Transactional
-    public void connectSpecializationDoctor(UUID doctorId, UUID specializationId ) {
-        Specialization specialization = repository.getOne(specializationId);
-        Doctor doctor = (Doctor) UserRepository.;
-        specialization.
-        UserRepository.save(doctor);
-
+    public void connectSpecializationDoctor(UUID doctorId, UUID specializationId) {
+        specializationRepository.findById(specializationId).ifPresent(specialization -> userRepository.findById(doctorId)
+                .ifPresent(user -> addDoctorToSpecialization(specialization, (Doctor) user)));
     }
 
-
-   /* public List<SpecializationDto> listSpecialization(UUID doctorId) {
-        var doctor = repository.getOne(doctorId);
-        return mapper.mapSpecialization(doctor.getTypeOfSpecialization());
-    }*/
-
-
+    @Transactional
+    private void addDoctorToSpecialization(Specialization specialization, Doctor doctor) {
+        specialization.addDoctor(doctor);
+        specializationRepository.save(specialization);
+    }
 }
