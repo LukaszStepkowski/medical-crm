@@ -36,7 +36,7 @@ public interface UserRepository extends JpaRepository<User, UUID>, JpaSpecificat
     int updateCrmSpecialistPassword(UUID id, String password);
 
 
-    Optional<Doctor> findById(String doctor);
+    Optional<User> findById(UUID userId);
 
 }
 
