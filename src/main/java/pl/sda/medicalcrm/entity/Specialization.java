@@ -45,6 +45,11 @@ public class Specialization {
         return new ArrayList<>(doctors);
     }
 
+
+
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
