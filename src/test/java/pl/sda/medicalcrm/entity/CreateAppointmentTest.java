@@ -35,5 +35,7 @@ public class CreateAppointmentTest {
 
         //then
         Assertions.assertEquals(readAppointment.getId(), appointment.getId());
+        Assertions.assertEquals(readAppointment.getPatient().getName(), appointment.getPatient().getName());
+
         }
 }
