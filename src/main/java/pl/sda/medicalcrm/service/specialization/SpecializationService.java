@@ -6,29 +6,52 @@ import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.Specialization;
 import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.repository.SpecializationRepository;
+import pl.sda.medicalcrm.repository.UserRepository;
+import pl.sda.medicalcrm.service.UserMapper;
 
 
-import javax.print.Doc;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 @Service
 public class SpecializationService {
-    private final SpecializationRepository repository;
-    private final SpecializationMapper mapper;
+    private final SpecializationRepository specializationRepository;
+    private final SpecializationMapper specializationMapper;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public SpecializationService(SpecializationRepository repository, SpecializationMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
+
+    public SpecializationService(SpecializationRepository repository, SpecializationMapper mapper, UserRepository userRepository, UserMapper userMapper) {
+        this.specializationRepository = repository;
+        this.specializationMapper = mapper;
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Transactional
     public Specialization createSpecialization(String typeOfSpecialization) {
         var specialization = new Specialization(typeOfSpecialization);
-        return repository.save(specialization);
+        return specializationRepository.save(specialization);
     }
 
     public List<SpecializationDto> listSpecialization() {
-            return mapper.mapSpecialization(repository.findAll());
+        return specializationMapper.mapSpecialization(specializationRepository.findAll());
     }
 
+
+    @Transactional
+    public void connectSpecializationDoctor(UUID userId, UUID specializationId) {
+        specializationRepository.findById(specializationId).ifPresent(specialization -> userRepository.findById(userId)
+                .ifPresent(user -> addDoctorToSpecialization(specialization,  user)));
+    }
+
+    @Transactional
+    private void addDoctorToSpecialization(Specialization specialization, User user) {
+
+
+        specialization.addDoctor(user);
+        specializationRepository.save(specialization);
+    }
 }

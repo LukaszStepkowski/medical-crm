@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import pl.sda.medicalcrm.entity.User;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID>, JpaSpecificationExecutor<User> {
@@ -31,6 +32,9 @@ public interface UserRepository extends JpaRepository<User, UUID>, JpaSpecificat
     @Modifying
     @Query("update CrmSpecialist c set c.password =?2 where  c.id =?1")
     int updateCrmSpecialistPassword(UUID id, String password);
+
+
+    Optional<User> findById(UUID userId);
 
 }
 

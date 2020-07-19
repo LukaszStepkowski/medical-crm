@@ -2,7 +2,6 @@ package pl.sda.medicalcrm.entity;
 
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -12,7 +11,7 @@ public class Appointment {
 
     @Id
     private UUID id;
-    private LocalDateTime date;
+    private LocalDateTime appointmentDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Patient patient;
@@ -30,10 +29,10 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(UUID id, LocalDateTime date, Patient patient, Specialization specialization,
+    public Appointment(LocalDateTime appointmentDate, Patient patient, Specialization specialization,
                        String clinic, boolean isOnline, String prescription) {
-        this.id = id;
-        this.date = date;
+        this.id = UUID.randomUUID();
+        this.appointmentDate = appointmentDate;
         this.patient = patient;
         this.specialization = specialization;
         this.examinations = new ArrayList<>();
@@ -47,7 +46,7 @@ public class Appointment {
     }
 
     public LocalDateTime getDate() {
-        return date;
+        return appointmentDate;
     }
 
     public Patient getPatient() {
@@ -59,7 +58,7 @@ public class Appointment {
     }
 
     public void addExamination(Examination examination) {
-        if (!examinations.contains(examination)){
+        if (!examinations.contains(examination)) {
             examinations.add(examination);
         }
     }
@@ -87,7 +86,7 @@ public class Appointment {
         Appointment that = (Appointment) o;
         return isOnline == that.isOnline &&
                 id.equals(that.id) &&
-                date.equals(that.date) &&
+                appointmentDate.equals(that.appointmentDate) &&
                 patient.equals(that.patient) &&
                 specialization.equals(that.specialization) &&
                 examinations.equals(that.examinations) &&
@@ -97,6 +96,6 @@ public class Appointment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, patient, specialization, examinations, clinic, isOnline, prescription);
+        return Objects.hash(id, appointmentDate, patient, specialization, examinations, clinic, isOnline, prescription);
     }
 }
