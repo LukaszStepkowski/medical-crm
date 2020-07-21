@@ -31,17 +31,7 @@ public class UserRestController {
     private UserRepository userRepository;
 
     @PostMapping (path = "/patients")
-    public @ResponseBody String createPatient(@RequestParam String login,
-                                              @RequestParam String password,
-                                              @RequestParam String name,
-                                              @RequestParam String surname,
-                                              @RequestParam String pesel) {
-        Patient patient = new Patient();
-        patient.setLogin(login);
-        patient.setPassword(password);
-        patient.setName(name);
-        patient.setSurname(surname);
-        patient.setPesel(pesel);
+    public @ResponseBody String createPatient(@RequestBody Patient patient) {
         userRepository.save(patient);
         return "Saved";
     }
