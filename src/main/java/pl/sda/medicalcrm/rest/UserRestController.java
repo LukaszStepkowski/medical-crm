@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.dto.*;
+import pl.sda.medicalcrm.entity.Admin;
 import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.Patient;
 import pl.sda.medicalcrm.entity.User;
@@ -73,15 +74,13 @@ public class UserRestController {
 //        service.changeDoctorEntity(userId,dto.getLogin(), dto.getPassword(), dto.getNpwz(), dto.getName(), dto.getSurname());
 //        return ResponseEntity.ok().build();
 //    }
-//
-//    @PostMapping(path = "/admins")
-//    ResponseEntity<UserIdDto> createAdmin(@RequestBody @Valid CreateAdminDto dto) {
-//        var id = service.createAdmin(dto);
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(new UserIdDto(id));
-//    }
-//
+
+    @PostMapping(path = "/admins")
+    public @ResponseBody Long createAdmin(@RequestBody @Valid Admin admin) {
+        userRepository.save(admin);
+        return admin.getId();
+    }
+
 //    @PatchMapping(path = "/patients/{userId}/password")
 //    ResponseEntity<UserIdDto>changePatientPassword(@PathVariable UUID userId,
 //                                                 @RequestBody @Valid ChangePatientPasswordDto dto){
