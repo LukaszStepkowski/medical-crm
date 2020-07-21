@@ -8,10 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.dto.*;
-import pl.sda.medicalcrm.entity.Admin;
-import pl.sda.medicalcrm.entity.Doctor;
-import pl.sda.medicalcrm.entity.Patient;
-import pl.sda.medicalcrm.entity.User;
+import pl.sda.medicalcrm.entity.*;
 import pl.sda.medicalcrm.repository.UserRepository;
 import pl.sda.medicalcrm.service.UserService;
 
@@ -52,14 +49,12 @@ public class UserRestController {
 //        service.changePatientEntity(userId,dto.getLogin(), dto.getPassword(), dto.getName(), dto.getSurname(), dto.getPesel());
 //        return  ResponseEntity.ok().build();
 //    }
-//
-//    @PostMapping(path = "/crmspecialists")
-//    ResponseEntity<UserIdDto> createCrmSpecialist(@RequestBody @Valid CreateCrmSpecialistDto dto) {
-//        var id = service.createCrmSpecialist(dto);
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(new UserIdDto(id));
-//    }
+
+    @PostMapping(path = "/crmspecialists")
+    public @ResponseBody Long createCrmSpecialist(@RequestBody @Valid CrmSpecialist crmSpecialist) {
+        userRepository.save(crmSpecialist);
+        return crmSpecialist.getId();
+    }
 
     @PostMapping(path = "/doctors")
     public @ResponseBody Long createDoctor(@RequestBody @Valid Doctor doctor) {
