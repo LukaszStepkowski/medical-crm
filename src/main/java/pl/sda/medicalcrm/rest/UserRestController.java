@@ -53,7 +53,6 @@ public class UserRestController {
         patient.setId(userId);
         userRepository.save(patient);
         return patient.getId();
-
     }
 
     @PostMapping(path = "/crmspecialists")
@@ -68,13 +67,17 @@ public class UserRestController {
         return doctor.getId();
     }
 
-//    @PutMapping(path = "/doctors/{userId}")
-//    ResponseEntity<UserIdDto> changeDoctorEntity(@PathVariable UUID userId,
-//                                           @RequestBody @Valid ChangeUserDoctorDto dto) {
-//
-//        service.changeDoctorEntity(userId,dto.getLogin(), dto.getPassword(), dto.getNpwz(), dto.getName(), dto.getSurname());
-//        return ResponseEntity.ok().build();
-//    }
+    @PutMapping(path = "/doctors/{userId}")
+    public @ResponseBody Long changeDoctorEntity(@PathVariable Long userId,
+                                           @RequestBody @Valid Doctor doctor) {
+
+        Optional<User> optionalDoctor = userRepository.findById(userId);
+        if (!optionalDoctor.isPresent()) return 0L;
+
+        doctor.setId(userId);
+        userRepository.save(doctor);
+        return doctor.getId();
+    }
 
     @PostMapping(path = "/admins")
     public @ResponseBody Long createAdmin(@RequestBody @Valid Admin admin) {
