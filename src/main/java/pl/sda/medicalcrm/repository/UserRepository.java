@@ -34,9 +34,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 //    @Modifying
 //    @Query("update CrmSpecialist c set c.password =?2 where  c.id =?1")
 //    int updateCrmSpecialistPassword(UUID id, String password);
-//
-//
-//    Optional<User> findById(UUID userId);
 
 }
 
