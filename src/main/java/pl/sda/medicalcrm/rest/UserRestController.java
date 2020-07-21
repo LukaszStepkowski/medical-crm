@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.dto.*;
+import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.Patient;
 import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.repository.UserRepository;
@@ -31,9 +32,9 @@ public class UserRestController {
     private UserRepository userRepository;
 
     @PostMapping (path = "/patients")
-    public @ResponseBody String createPatient(@RequestBody Patient patient) {
+    public @ResponseBody Long createPatient(@RequestBody @Valid Patient patient) {
         userRepository.save(patient);
-        return "Saved";
+        return patient.getId();
     }
 
 //    @PostMapping (path = "/patients")
@@ -58,15 +59,13 @@ public class UserRestController {
 //                .status(HttpStatus.CREATED)
 //                .body(new UserIdDto(id));
 //    }
-//
-//    @PostMapping(path = "/doctors")
-//    ResponseEntity<UserIdDto> createDoctor(@RequestBody @Valid CreateDoctorDto dto) {
-//        var id = service.createDoctor(dto);
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(new UserIdDto(id));
-//    }
-//
+
+    @PostMapping(path = "/doctors")
+    public @ResponseBody Long createDoctor(@RequestBody @Valid Doctor doctor) {
+        userRepository.save(doctor);
+        return doctor.getId();
+    }
+
 //    @PutMapping(path = "/doctors/{userId}")
 //    ResponseEntity<UserIdDto> changeDoctorEntity(@PathVariable UUID userId,
 //                                           @RequestBody @Valid ChangeUserDoctorDto dto) {

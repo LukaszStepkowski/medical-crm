@@ -11,7 +11,7 @@ import pl.sda.medicalcrm.entity.User;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
 
 //    @Modifying
