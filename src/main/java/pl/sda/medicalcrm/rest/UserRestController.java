@@ -13,6 +13,7 @@ import pl.sda.medicalcrm.repository.UserRepository;
 import pl.sda.medicalcrm.service.UserService;
 
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -42,13 +43,18 @@ public class UserRestController {
 //                .status(HttpStatus.CREATED)
 //                .body(new UserIdDto(id));
 //    }
-//
-//    @PutMapping(path = "/patients/{userId}")
-//    ResponseEntity<UserIdDto>changePatientEntity(@PathVariable UUID userId,
-//                                                 @RequestBody @Valid ChangeUserPatientDto dto){
-//        service.changePatientEntity(userId,dto.getLogin(), dto.getPassword(), dto.getName(), dto.getSurname(), dto.getPesel());
-//        return  ResponseEntity.ok().build();
-//    }
+
+    @PutMapping(path = "/patients/{userId}")
+    public @ResponseBody Long changePatientEntity(@PathVariable Long userId,
+                                                 @RequestBody @Valid Patient patient){
+        Optional<User> optionalPatient = userRepository.findById(userId);
+        if (!optionalPatient.isPresent()) return 0L;
+
+        patient.setId(userId);
+        userRepository.save(patient);
+        return patient.getId();
+
+    }
 
     @PostMapping(path = "/crmspecialists")
     public @ResponseBody Long createCrmSpecialist(@RequestBody @Valid CrmSpecialist crmSpecialist) {
