@@ -1,44 +1,21 @@
 package pl.sda.medicalcrm.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "pictures")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Picture {
 
     @Id
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String picturePath;
 
-    public Picture() {
-    }
-
-    public Picture(String picturePath) {
-        this.id = UUID.randomUUID();
-        this.picturePath = picturePath;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getPicturePath() {
-        return picturePath;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Picture picture = (Picture) o;
-        return id.equals(picture.id) &&
-                picturePath.equals(picture.picturePath);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, picturePath);
-    }
 }
