@@ -1,16 +1,14 @@
-//package pl.sda.medicalcrm.rest;
-//
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//import pl.sda.medicalcrm.service.appointment.AppointmentService;
-//
-//@RestController
-//@RequestMapping("/appointments")
-//public class AppointmentRestController {
-//
-//    private final AppointmentService service;
-//
-//    public AppointmentRestController(AppointmentService service) {
-//        this.service = service;
-//    }
-//}
+package pl.sda.medicalcrm.rest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import pl.sda.medicalcrm.repository.AppointmentRepository;
+
+@Controller
+@RequestMapping("/appointments")
+public class AppointmentRestController {
+
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+}

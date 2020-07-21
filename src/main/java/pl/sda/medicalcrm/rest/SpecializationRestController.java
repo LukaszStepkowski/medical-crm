@@ -1,49 +1,54 @@
-//package pl.sda.medicalcrm.rest;
-//
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//import pl.sda.medicalcrm.dto.SpecializationDto;
-//import pl.sda.medicalcrm.dto.UserIdDto;
-//import pl.sda.medicalcrm.entity.Specialization;
-//import pl.sda.medicalcrm.service.specialization.SpecializationService;
-//
-//import javax.validation.Valid;
-//import java.util.List;
-//import java.util.UUID;
-//@RestController
-//public class SpecializationRestController {
-//
-//    private final SpecializationService service;
-//
-//    public SpecializationRestController(SpecializationService service) {
-//        this.service = service;
-//    }
-//
-//    @GetMapping(path = "/specializations")
-//    List<SpecializationDto> listSpecializations(){return  service.listSpecialization();}
-//
-//    @PostMapping(path = "/specializations")
-//    ResponseEntity<UserIdDto> createSpecialization(@RequestBody @Valid SpecializationDto dto){
-//        Specialization specialization = service.createSpecialization(dto.getTypeOfSpecialization());
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .build();
-//    }
-//
-///*
-//    @GetMapping(path = "/{doctorId}/specializations")
-//    List<SpecializationDto> listSpecializations(@PathVariable UUID doctorId) {
-//        return service.listSpecialization(doctorId);
-//    }*/
-//
-//    @PostMapping(path = "/{doctorId/specializations")
-//    ResponseEntity<UserIdDto> connectSpecializationDoctor(@PathVariable UUID doctorId,
-//                                                          @RequestBody @Valid  UUID specializationId) {
-//
-//        service.connectSpecializationDoctor(doctorId,specializationId);
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .build();
-//    }
-//}
+package pl.sda.medicalcrm.rest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import pl.sda.medicalcrm.entity.Doctor;
+import pl.sda.medicalcrm.entity.Specialization;
+import pl.sda.medicalcrm.entity.User;
+import pl.sda.medicalcrm.repository.SpecializationRepository;
+import pl.sda.medicalcrm.repository.UserRepository;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+
+@Controller
+@RequestMapping(path = "/specializations")
+public class SpecializationRestController {
+
+    @Autowired
+    private SpecializationRepository specializationRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping
+    public List<Specialization> listSpecializations(){
+        return (List<Specialization>) specializationRepository.findAll();
+    }
+
+    @PostMapping
+    public @ResponseBody Long createSpecialization(@RequestBody @Valid Specialization specialization){
+        //TODO could need to set new ArrayList before saving to repository
+        specializationRepository.save(specialization);
+        return specialization.getId();
+    }
+
+    @PutMapping(path = "/{doctorId}/{specializationId")
+    public @ResponseBody Long connectSpecializationDoctor(@PathVariable Long doctorId,
+                                                          @PathVariable Long specializationId,
+                                                          @RequestBody @Valid Specialization specialization,
+                                                          @RequestBody @Valid Doctor doctor) {
+        Optional<Specialization> specializationOptional = specializationRepository.findById(specializationId);
+        if (!specializationOptional.isPresent()) return 0L;
+
+        Optional<User> doctorOptional = userRepository.findById(doctorId);
+        if (!doctorOptional.isPresent()) return 0L;
+
+        specialization.setId(specializationId);
+        specialization.getDoctors().add(doctor);
+        specializationRepository.save(specialization);
+        return specialization.getId();
+    }
+}
