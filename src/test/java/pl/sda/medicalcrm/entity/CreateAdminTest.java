@@ -18,7 +18,11 @@ public class CreateAdminTest {
     @Test
     void createAdminTest(){
         //given
-        var admin = new Admin("admin", "password", "Jan", "Kowalski");
+        var admin = new Admin();
+        admin.setLogin("jakowa");
+        admin.setPassword("Password1!");
+        admin.setName("Jan");
+        admin.setSurname("Kowalski");
 
         //when
         em.persist(admin);

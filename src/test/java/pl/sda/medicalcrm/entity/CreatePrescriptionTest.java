@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 
 @SpringBootTest
 @Transactional
@@ -20,7 +19,9 @@ public class CreatePrescriptionTest {
     void CreatePrescriptionTest() {
 
     //given
-        var prescription = new Prescription(1234, "description");
+        var prescription = new Prescription();
+        prescription.setDescription("brac prochy");
+        prescription.setPrescriptionNo(1234);
 
     //when
         em.persist(prescription);

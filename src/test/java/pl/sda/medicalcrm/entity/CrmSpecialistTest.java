@@ -18,7 +18,11 @@ public class CrmSpecialistTest {
     @Test
     void CreateCrmSpecialistTest (){
         //given
-        var crmSpecialist = new CrmSpecialist("jakowa", "password", "Jan", "Kowalski");
+        var crmSpecialist = new CrmSpecialist();
+        crmSpecialist.setLogin("jakowa");
+        crmSpecialist.setPassword("Password1!");
+        crmSpecialist.setName("Jan");
+        crmSpecialist.setSurname("Kowalski");
 
         //when
         em.persist(crmSpecialist);

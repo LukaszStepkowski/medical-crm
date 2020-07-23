@@ -1,5 +1,8 @@
 package pl.sda.medicalcrm.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -7,14 +10,18 @@ import java.util.*;
 
 @Entity
 @Table(name = "appointments")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Appointment {
 
     @Id
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private LocalDateTime appointmentDate;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Patient patient;
+    private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Specialization specialization;
@@ -30,76 +37,4 @@ public class Appointment {
     @OneToOne(cascade = CascadeType.ALL)
     private Prescription prescription;
 
-    public Appointment() {
-    }
-
-    public Appointment(LocalDateTime appointmentDate, Patient patient, Specialization specialization,
-                       Clinic clinic, boolean isOnline, Prescription prescription) {
-        this.id = UUID.randomUUID();
-        this.appointmentDate = appointmentDate;
-        this.patient = patient;
-        this.specialization = specialization;
-        this.examinations = new ArrayList<>();
-        this.clinic = clinic;
-        this.isOnline = isOnline;
-        this.prescription = prescription;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public LocalDateTime getDate() {
-        return appointmentDate;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public Specialization getSpecialization() {
-        return specialization;
-    }
-
-    public void addExamination(Examination examination) {
-        if (!examinations.contains(examination)) {
-            examinations.add(examination);
-        }
-    }
-
-    public List<Examination> getExaminations() {
-        return new ArrayList<>(examinations);
-    }
-
-    public Clinic getClinic() {
-        return clinic;
-    }
-
-    public boolean isOnline() {
-        return isOnline;
-    }
-
-    public Prescription getPrescription() {
-        return prescription;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Appointment that = (Appointment) o;
-        return isOnline == that.isOnline &&
-                id.equals(that.id) &&
-                appointmentDate.equals(that.appointmentDate) &&
-                patient.equals(that.patient) &&
-                specialization.equals(that.specialization) &&
-                examinations.equals(that.examinations) &&
-                clinic.equals(that.clinic) &&
-                prescription.equals(that.prescription);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, appointmentDate, patient, specialization, examinations, clinic, isOnline, prescription);
-    }
 }

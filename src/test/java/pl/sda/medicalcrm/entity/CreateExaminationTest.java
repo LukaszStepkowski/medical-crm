@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -16,9 +18,19 @@ public class CreateExaminationTest {
     private EntityManager em;
 
     @Test
-    void createAppointmentTest() {
+    void createExaminationTest() {
         //given
-        var examination = new Examination("examination_type", "result", "description");
+        var picture = new Picture();
+        picture.setPicturePath("www.zdjeciatusom.pl");
+
+        List<Picture> pictures = new ArrayList<>();
+        pictures.add(picture);
+
+        var examination = new Examination();
+        examination.setType("Kolonoskopia");
+        examination.setResult("Mogło być lepiej");
+        examination.setDescription("opis");
+        examination.setPictures(pictures);
 
         //when
         em.persist(examination);

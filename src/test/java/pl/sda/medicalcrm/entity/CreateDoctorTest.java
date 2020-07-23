@@ -24,8 +24,12 @@ class CreateDoctorTest {
 
         //given
 
-        var doctor = new Doctor("doctor1", "password", "1234567",
-                "Jan", "Kowalski");
+        var doctor = new Doctor();
+        doctor.setLogin("jakowa");
+        doctor.setPassword("Password1!");
+        doctor.setNpwz("1234567");
+        doctor.setName("Jan");
+        doctor.setSurname("Kowalski");
 
         //when
         em.persist(doctor);

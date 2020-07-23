@@ -1,72 +1,24 @@
 package pl.sda.medicalcrm.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Objects;
-import java.util.UUID;
-
+import javax.persistence.*;
 
 @Entity
 @Table(name="addresses")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address{
 
     @Id
-    private UUID id;
-    private  String street;
-    private  String city;
-    private  String zipCode;
-    private  String country;
-
-    private Address (){
-
-    }
-
-    public Address(String street, String city, String zipCode, String country) {
-        this.id = UUID.randomUUID();
-        this.street = street;
-        this.city = city;
-        this.zipCode = zipCode;
-        this.country = country;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Address address = (Address) o;
-
-        if (!street.equals(address.street)) return false;
-        if (!city.equals(address.city)) return false;
-        if (!zipCode.equals(address.zipCode)) return false;
-        return country.equals(address.country);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(street, city, zipCode, country);
-    }
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String street;
+    private String city;
+    private String zipCode;
+    private String country;
 
 }

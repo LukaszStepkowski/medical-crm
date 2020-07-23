@@ -20,8 +20,14 @@ public class CreateClinicTest {
     @Test
     void createClinicTest() {
         //given
-        var address = new Address("street", "city", "zipCode", "Poland");
-        var clinic = new Clinic(address);
+        var address = new Address();
+        address.setStreet("Puławska 12");
+        address.setCity("Warszawa");
+        address.setCountry("Poland");
+        address.setZipCode("00-756");
+
+        var clinic = new Clinic();
+        clinic.setAddress(address);
 
         //when
         em.persist(clinic);
