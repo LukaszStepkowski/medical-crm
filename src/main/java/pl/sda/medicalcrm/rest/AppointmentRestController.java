@@ -13,23 +13,22 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/appointments")
 public class AppointmentRestController {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    @PostMapping(path = "/appointments")
-    public @ResponseBody Long createAppointment(@RequestBody @Valid Appointment appointment){
-        appointmentRepository.save(appointment);
-        return appointment.getId();
-    }
-
-    @PostMapping(path = "/{patientId}/appointment")
-    public @ResponseBody Long createAppointmentByPatient(@PathVariable Long patientId,
-                                                         @RequestBody @Valid Appointment appointment){
-        appointmentRepository.save(appointment);
-        return appointment.getId();
-    }
+//    @PostMapping(path = "/appointments")
+//    public @ResponseBody Long createAppointment(@RequestBody @Valid Appointment appointment){
+//        appointmentRepository.save(appointment);
+//        return appointment.getId();
+//    }
+//
+//    @PostMapping(path = "/users/patients/{userId}/appointment")
+//    public @ResponseBody Long createAppointmentByPatient(@PathVariable Long patientId,
+//                                                         @RequestBody @Valid Appointment appointment){
+//        appointmentRepository.save(appointment);
+//        return appointment.getId();
+//    }
 
 }
