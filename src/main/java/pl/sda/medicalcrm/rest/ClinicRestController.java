@@ -1,7 +1,6 @@
 package pl.sda.medicalcrm.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,10 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.sda.medicalcrm.entity.Address;
 import pl.sda.medicalcrm.entity.Clinic;
+import pl.sda.medicalcrm.entity.Doctor;
+import pl.sda.medicalcrm.entity.Specialization;
 import pl.sda.medicalcrm.repository.AddressRepository;
 import pl.sda.medicalcrm.repository.ClinicRepository;
 
 import javax.validation.Valid;
+import java.lang.reflect.Field;
+import java.util.Optional;
 
 
 @Controller
@@ -25,15 +28,22 @@ public class ClinicRestController {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private AddressRestController addressRestController;
+
     @PostMapping
     public @ResponseBody
-    Long createClinic(@RequestBody @Valid Clinic clinic) {
+    Long createClinic(@RequestBody @Valid Address address) {
 
+        Optional<Address> addressOptional = addressRepository.findById(address.getId());
+        if (!addressOptional.isPresent()){
+            addressRestController.createAddress(address);}
 
+        Clinic clinic = new Clinic();
+        clinic.setAddress(address);
         clinicRepository.save(clinic);
         return clinic.getId();
     }
 }
-
 
 
