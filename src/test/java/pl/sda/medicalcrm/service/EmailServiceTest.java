@@ -26,7 +26,7 @@ public class EmailServiceTest {
         //given
         var patient = new Patient();
         patient.setLogin("medicalcrm23@gmail.com");
-        patient.setPassword("password");
+        patient.setPassword("password1!");
         patient.setName("Jan");
         patient.setSurname("Kowalski");
         patient.setPesel("12345678912");

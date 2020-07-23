@@ -53,7 +53,7 @@ class AppointmentServiceTest {
         doctor.setName("Karol");
         doctor.setNpwz("1234567");
         doctor.setPassword("Password2!");
-        doctor.setLogin("kanowa");
+        doctor.setLogin("test@test.com.pl");
 
         var specialization = new Specialization();
         specialization.setTypeOfSpecialization("Kardiolog");
@@ -74,8 +74,9 @@ class AppointmentServiceTest {
         prescription.setDescription("brac prochy");
         prescription.setPrescriptionNo(1234);
 
+        var date = LocalDateTime.now();
         var appointment = new Appointment();
-        appointment.setAppointmentDate(LocalDateTime.now());
+        appointment.setAppointmentDate(date);
         appointment.setClinic(clinic);
         appointment.setOnline(false);
         appointment.setPrescription(prescription);

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -18,7 +20,11 @@ public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     int prescriptionNo;
+
+    @NotEmpty
+    @NotBlank
     String description;
 
 }

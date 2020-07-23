@@ -19,7 +19,7 @@ public class CrmSpecialistTest {
     void CreateCrmSpecialistTest (){
         //given
         var crmSpecialist = new CrmSpecialist();
-        crmSpecialist.setLogin("jakowa");
+        crmSpecialist.setLogin("test@test.com.pl");
         crmSpecialist.setPassword("Password1!");
         crmSpecialist.setName("Jan");
         crmSpecialist.setSurname("Kowalski");
