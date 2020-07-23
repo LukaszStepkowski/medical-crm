@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.*;
 import pl.sda.medicalcrm.repository.UserRepository;
+import pl.sda.medicalcrm.service.EmailService;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -19,8 +20,14 @@ public class UserRestController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     @PostMapping (path = "/patients")
-    public @ResponseBody Long createPatient(@RequestBody @Valid Patient patient) {
+    public @ResponseBody Long createPatient(@RequestBody @Valid Patient patient)
+            throws MailjetException, MailjetSocketTimeoutException {
+
+        emailService.sendEmail(patient);
         userRepository.save(patient);
         return patient.getId();
     }
