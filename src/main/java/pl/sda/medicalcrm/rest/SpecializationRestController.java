@@ -35,7 +35,7 @@ public class SpecializationRestController {
         return specialization.getId();
     }
 
-    @PutMapping(path = "/{doctorId}/{specializationId")
+    @PutMapping(path = "/{doctorId}/{specializationId}")
     public @ResponseBody Long connectSpecializationDoctor(@PathVariable Long doctorId,
                                                           @PathVariable Long specializationId,
                                                           @RequestBody @Valid Specialization specialization,
