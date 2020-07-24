@@ -11,7 +11,7 @@
 	<groupId>pl.sda</groupId>
 	<artifactId>medical-crm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>medical-crm</name>
 	<description>Demo project for Spring Boot</description>
 
