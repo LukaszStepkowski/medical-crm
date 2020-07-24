@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://medical-crm-app.herokuapp.com/")
 public class UserRestController {
 
     @Autowired
@@ -31,14 +31,6 @@ public class UserRestController {
         userRepository.save(patient);
         return patient.getId();
     }
-
-//    @PostMapping (path = "/patients")
-//    ResponseEntity<UserIdDto> createPatientWithSendingEmail(@RequestBody @Valid CreatePatientDto dto) throws MailjetSocketTimeoutException, MailjetException {
-//        var id = service.createPatientWithSendingEmail(dto);
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(new UserIdDto(id));
-//    }
 
     @PutMapping(path = "/patients/{userId}")
     public @ResponseBody Long changePatientEntity(@PathVariable Long userId,
