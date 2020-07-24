@@ -88,7 +88,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<scope>42.2.10</scope>
+			<scope>runtime</scope>
 		</dependency>
 
 	</dependencies>
