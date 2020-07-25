@@ -18,16 +18,23 @@ public class AddressRestController {
     private AddressRepository addressRepository;
 
     @GetMapping
-    public List<Address> listAddresses(){
+    public List<Address> listAddresses() {
         return (List<Address>) addressRepository.findAll();
     }
 
     @PostMapping
     public @ResponseBody
     Long createAddress(@RequestBody @Valid Address address) {
+        if (checkForAddress(address)) return 0L;
         addressRepository.save(address);
         return address.getId();
     }
+
+    protected boolean checkForAddress(Address address) {
+        return listAddresses().stream()
+                .anyMatch(s -> s.getId().equals(address.getId()));
+    }
+
 }
 
 
