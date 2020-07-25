@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.sda.medicalcrm.dto.appointment.CreateAppointmentDto;
 import pl.sda.medicalcrm.entity.*;
 import pl.sda.medicalcrm.repository.AppointmentRepository;
 import pl.sda.medicalcrm.service.appointment.AppointmentService;

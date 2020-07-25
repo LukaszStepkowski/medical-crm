@@ -1,31 +1,38 @@
 package pl.sda.medicalcrm.service;
 
-import com.mailjet.client.errors.MailjetException;
-import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sda.medicalcrm.dto.*;
 import pl.sda.medicalcrm.entity.*;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
-import java.util.UUID;
+import java.util.List;
 
 @Service
-public class UserService {
+public class PatientService {
 
-//    private final UserRepository repository;
-//
-//    public UserService (UserRepository repository) {
-//        this.repository = repository;
-//    }
-//
-//    @Transactional
-//    public UUID createPatient(CreatePatientDto dto) {
-//        var patient = new Patient(dto.getLogin(), dto.getPassword(), dto.getName(),
-//                dto.getSurname(), dto.getPesel());
-//        repository.save(patient);
-//        return patient.getId();
-//    }
+    @Autowired
+    private UserRepository userRepository;
+
+    @Transactional
+    public Long registerNewPatient (Patient patient) {
+        if (isLoginAlreadyInDataBase(patient)) return 0L;
+        userRepository.save(patient);
+        return patient.getId();
+    }
+
+    @Transactional
+    public Long changePatientData(Long id, Patient patient){
+        if (!userRepository.findById(id).isPresent()) return 0L;
+        patient.setId(id);
+        userRepository.save(patient);
+        return patient.getId();
+    }
+
+    private boolean isLoginAlreadyInDataBase(User user) {
+        List<User> allUsers = (List<User>) userRepository.findAll();
+        return allUsers.stream().anyMatch(u -> u.getLogin().equals(user.getLogin()));
+    }
 //
 //    @Transactional
 //    public UUID createCrmSpecialist(CreateCrmSpecialistDto dto) {
@@ -53,17 +60,6 @@ public class UserService {
 //        var admin = new Admin(dto.getLogin(), dto.getPassword(), dto.getName(), dto.getSurname());
 //        repository.save(admin);
 //        return admin.getId();
-//    }
-//
-//    @Transactional
-//    public UUID createPatientWithSendingEmail(CreatePatientDto dto) throws MailjetSocketTimeoutException, MailjetException {
-//        var patient = new Patient(dto.getLogin(), dto.getPassword(), dto.getName(),
-//                dto.getSurname(), dto.getPesel());
-//        EmailSenderDto emailDto = new EmailSenderDto(dto.getLogin(), dto.getName());
-//        EmailService emailService = new EmailService();
-//        emailService.sendEmail(emailDto);
-//        repository.save(patient);
-//        return patient.getId();
 //    }
 //
 //    @Transactional

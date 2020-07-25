@@ -16,6 +16,7 @@ public class Clinic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 

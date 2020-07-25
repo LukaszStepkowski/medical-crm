@@ -70,7 +70,7 @@ public class SpecializationRestController {
         return specialization.getId();
     }
 
-    @DeleteMapping(path = "/${specializationId}")
+    @DeleteMapping(path = "/{specializationId}")
     public @ResponseBody String deleteSpecialization (@PathVariable Long specializationId) {
         specializationRepository.deleteById(specializationId);
         return "Specialization deleted";

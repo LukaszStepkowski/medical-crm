@@ -3,6 +3,7 @@ package pl.sda.medicalcrm.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,7 +12,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name="prescriptions")
+@Table(name = "prescriptions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +22,8 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotEmpty
+    @NotBlank
     int prescriptionNo;
 
     @NotEmpty
