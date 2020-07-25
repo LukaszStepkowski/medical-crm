@@ -25,7 +25,7 @@ class CreateDoctorTest {
         //given
 
         var doctor = new Doctor();
-        doctor.setLogin("jakowa");
+        doctor.setLogin("test@test.com.pl");
         doctor.setPassword("Password1!");
         doctor.setNpwz("1234567");
         doctor.setName("Jan");
