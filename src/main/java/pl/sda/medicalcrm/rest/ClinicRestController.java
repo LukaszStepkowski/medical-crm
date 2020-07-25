@@ -44,15 +44,7 @@ public class ClinicRestController {
 //        return clinic.getId();
 //    }
 
-    @PostMapping
-    public @ResponseBody
-    Long createClinic(@RequestBody @Valid Address address) {
 
-        Clinic clinic = new Clinic();
-        clinic.setAddress(address);
-        clinicRepository.save(clinic);
-        return clinic.getId();
-    }
 }
 
 
