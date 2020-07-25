@@ -46,6 +46,33 @@ public class SpecializationRestController {
         return specialization.getId();
     }*/
 
+    @PostMapping
+    public @ResponseBody Long createSpecialization(@RequestBody @Valid Specialization specialization){
+        if (checkForSpecialization(specialization)) return 0L;
+        specializationRepository.save(specialization);
+        return specialization.getId();
+    }
+
+    @PutMapping(path = "/{doctorId}/{specializationId}")
+    public @ResponseBody Long connectSpecializationDoctor(@PathVariable Long doctorId,
+                                                          @PathVariable Long specializationId) {
+        Optional<Specialization> specializationOptional = specializationRepository.findById(specializationId);
+        if (!specializationOptional.isPresent()) return 0L;
+        Optional<User> doctorOptional = userRepository.findById(doctorId);
+        if (!doctorOptional.isPresent()) return 0L;
+        Specialization specialization = specializationOptional.get();
+        User doctor = doctorOptional.get();
+        specialization.setId(specializationId);
+        specialization.getDoctors().add(doctor);
+        specializationRepository.save(specialization);
+        return specialization.getId();
+    }
+    private boolean checkForSpecialization(Specialization specialization) {
+        return listSpecializations().stream()
+                .anyMatch(s -> s.getTypeOfSpecialization().equals(specialization.getTypeOfSpecialization()));
+    }
+
+
 
     }
 
