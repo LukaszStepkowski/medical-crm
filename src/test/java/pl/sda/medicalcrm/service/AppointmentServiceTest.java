@@ -2,13 +2,11 @@ package pl.sda.medicalcrm.service;
 
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.sda.medicalcrm.entity.*;
 import pl.sda.medicalcrm.repository.AppointmentRepository;
-import pl.sda.medicalcrm.service.appointment.AppointmentService;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -17,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

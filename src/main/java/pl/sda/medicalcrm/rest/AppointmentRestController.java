@@ -4,31 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.Appointment;
-import pl.sda.medicalcrm.entity.Doctor;
-import pl.sda.medicalcrm.entity.Specialization;
-import pl.sda.medicalcrm.entity.User;
-import pl.sda.medicalcrm.repository.AppointmentRepository;
+import pl.sda.medicalcrm.service.AppointmentService;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
+@RequestMapping("/appointments")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AppointmentRestController {
 
     @Autowired
-    private AppointmentRepository appointmentRepository;
+    private AppointmentService appointmentService;
 
-//    @PostMapping(path = "/appointments")
-//    public @ResponseBody Long createAppointment(@RequestBody @Valid Appointment appointment){
-//        appointmentRepository.save(appointment);
-//        return appointment.getId();
-//    }
-//
-//    @PostMapping(path = "/users/patients/{userId}/appointment")
-//    public @ResponseBody Long createAppointmentByPatient(@PathVariable Long patientId,
-//                                                         @RequestBody @Valid Appointment appointment){
-//        appointmentRepository.save(appointment);
-//        return appointment.getId();
-//    }
+    @PostMapping
+    public @ResponseBody
+    Long makeNewAppointment(@RequestBody @Valid Appointment appointment){
+        return appointmentService.makeNewAppointment(appointment);
+    }
 
 }
