@@ -28,13 +28,7 @@ public class SpecializationRestController {
     public @ResponseBody List<Specialization> listSpecializations(){
         return (List<Specialization>) specializationRepository.findAll();
     }
-/*
-    @PostMapping
-    public @ResponseBody Long createSpecialization(@RequestBody @Valid Specialization specialization){
-        //TODO could need to set new ArrayList before saving to repository
-        specializationRepository.save(specialization);
-        return specialization.getId();
-    }*/
+    
 /*
     @PutMapping(path = "/{doctorId}/{specializationId}")
     public @ResponseBody Long connectSpecializationDoctor(@PathVariable Long doctorId,
@@ -53,16 +47,13 @@ public class SpecializationRestController {
         return specialization.getId();
     }*/
 
-
-
-
     @PostMapping
     public @ResponseBody Long createSpecialization(@RequestBody @Valid Specialization specialization){
-        if (checkForSpecialization(specialization )){
-            specializationRepository.save(specialization);
-            return specialization.getId();
-        } else return 0L;
+        if (checkForSpecialization(specialization)) return 0L;
+        specializationRepository.save(specialization);
+        return specialization.getId();
     }
+
     @PutMapping(path = "/{doctorId}/{specializationId}")
     public @ResponseBody Long connectSpecializationDoctor(@PathVariable Long doctorId,
                                                           @PathVariable Long specializationId) {
@@ -78,15 +69,8 @@ public class SpecializationRestController {
         return specialization.getId();
     }
     private boolean checkForSpecialization(Specialization specialization) {
-        if (listSpecializations().contains(specialization )) {
-
-
-            return true;
-        } else {
-            return false;
-
+        return listSpecializations().stream()
+                .anyMatch(s -> s.getTypeOfSpecialization().equals(specialization.getTypeOfSpecialization()));
         }
-
-    }
 
 }
