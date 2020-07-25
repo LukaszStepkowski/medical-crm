@@ -70,13 +70,13 @@ public class SpecializationRestController {
         return specialization.getId();
     }
 
-/*
+
     @DeleteMapping(path = "/{specializationId}")
     public @ResponseBody String deleteSpecialization (@PathVariable Long specializationId) {
         specializationRepository.deleteById(specializationId);
         return "Specialization deleted";
     }
-*/
+
 
     private boolean specializationExisits(Specialization specialization) {
         return listSpecializations().stream()

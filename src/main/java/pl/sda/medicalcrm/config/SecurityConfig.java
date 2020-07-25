@@ -20,21 +20,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     SecurityConfig(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-/*
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/signIn", "/register")
-                .permitAll()
-                .anyRequest().authenticated()
-                .and().httpBasic();
+                .anyRequest()
+               // .antMatchers("/", "/signIn", "/register")
+                .permitAll();
+               // .anyRequest().authenticated()
+               // .and().httpBasic();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource);
-    }*/
+    }
 
     @Bean
     PasswordEncoder passwordEncoder() {
