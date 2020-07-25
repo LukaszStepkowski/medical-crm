@@ -18,7 +18,8 @@ public class AddressRestController {
     private AddressRepository addressRepository;
 
     @GetMapping
-    public @ResponseBody List<Address> listAddresses() {
+    public @ResponseBody
+    List<Address> listAddresses() {
         return (List<Address>) addressRepository.findAll();
     }
 
@@ -31,11 +32,12 @@ public class AddressRestController {
         return address.getId();
     }
 
-    @GetMapping(path = "/addresses/{addressId}")
-    public Address findAddress(Long addressId) {
-        Optional<Address> addressOptional = addressRepository.findById(addressId);
-        return addressOptional.get();
-    }
+//    @GetMapping(path = "/addresses/{addressId}")
+//    public @ResponseBody
+//    Address findAddress(@PathVariable Long addressId) {
+//        Optional<Address> addressOptional = addressRepository.findById(addressId);
+//        return addressOptional.get();
+//    }
 
 
     private boolean checkForAddress(Address address) {
