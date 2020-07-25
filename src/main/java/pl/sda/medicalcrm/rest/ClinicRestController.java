@@ -7,6 +7,8 @@ import pl.sda.medicalcrm.entity.Address;
 import pl.sda.medicalcrm.entity.Clinic;
 import pl.sda.medicalcrm.repository.AddressRepository;
 import pl.sda.medicalcrm.repository.ClinicRepository;
+import pl.sda.medicalcrm.service.AddressService;
+import pl.sda.medicalcrm.service.ClinicService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,35 +18,41 @@ import java.util.List;
 @RequestMapping(path = "/clinics")
 public class ClinicRestController {
 
-    @Autowired
-    private ClinicRepository clinicRepository;
 
     @Autowired
-    private AddressRepository addressRepository;
+    private AddressService addressService;
 
     @Autowired
-    private AddressRestController addressRestController;
-
+    private ClinicService clinicService;
 
     @GetMapping
     public @ResponseBody
     List<Clinic> listClinic() {
-        return (List<Clinic>) clinicRepository.findAll();
+        return clinicService.getListOfAllClinics();
     }
 
-//    @PostMapping
-//    public @ResponseBody
-//    Long createClinic(@RequestBody @Valid Long addressId) {
-//
-//        Address address = addressRestController.findAddress(addressId);
-//
-//        Clinic clinic = new Clinic();
-//        clinic.setAddress(address);
-//        clinicRepository.save(clinic);
-//        return clinic.getId();
-//    }
+    @PostMapping
+    public @ResponseBody
+    Long createClinic(@RequestBody @Valid Clinic clinic) {
+        return clinicService.createClinic(clinic);
+    }
 
+    @PutMapping(path = "/{clinicId}/{addressId}")
+    public @ResponseBody
+    Long setClinicAddress(@PathVariable Long clinicId,
+                          @PathVariable Long addressId,
+                          @RequestBody @Valid Clinic clinic,
+                          @RequestBody @Valid Address address) {
 
+        clinic.setId(clinicId);
+        clinic.setAddress(address);
+        return clinicService.saveClinic(clinic);
+    }
 }
+
+
+
+
+
 
 

@@ -1,29 +1,45 @@
 package pl.sda.medicalcrm.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import pl.sda.medicalcrm.entity.Address;
-import pl.sda.medicalcrm.entity.Clinic;
+import pl.sda.medicalcrm.entity.*;
 import pl.sda.medicalcrm.repository.ClinicRepository;
 
-import javax.validation.Valid;
+import java.util.List;
 
 @Service
 public class ClinicService {
 
+    @Autowired
     private ClinicRepository clinicRepository;
 
-    @PostMapping
-    public @ResponseBody
-    Long createClinic(@RequestBody @Valid Address address) {
+    public ClinicService() {
+    }
 
-        Clinic clinic = new Clinic();
-        clinic.setAddress(address);
+    public List<Clinic> getListOfAllClinics() {
+        return (List<Clinic>) clinicRepository.findAll();
+    }
+
+    public Long createClinic(Clinic clinic) {
+        if (doesClinicExists(clinic)) return 0L;
+
+        clinicRepository.save(clinic);
+        return clinic.getId();
+    }
+
+    public boolean doesClinicExists(Clinic clinic) {
+        return getListOfAllClinics().stream()
+                .anyMatch(s -> s.getClinicName().equals(clinic.getClinicName())
+                );
+    }
+
+    public Long saveClinic(Clinic clinic) {
         clinicRepository.save(clinic);
         return clinic.getId();
     }
 
 
 }
+
+
+

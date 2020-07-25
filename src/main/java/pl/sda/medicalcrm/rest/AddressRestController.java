@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.Address;
-import pl.sda.medicalcrm.entity.Admin;
 import pl.sda.medicalcrm.service.AddressService;
 
 import javax.validation.Valid;

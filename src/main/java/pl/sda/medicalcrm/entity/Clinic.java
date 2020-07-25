@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="clinics")
@@ -16,6 +18,11 @@ public class Clinic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull
+    @NotEmpty
+    private String clinicName;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
