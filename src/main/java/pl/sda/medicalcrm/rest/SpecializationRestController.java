@@ -49,7 +49,7 @@ public class SpecializationRestController {
     @PostMapping
     public @ResponseBody
     Long createSpecialization(@RequestBody @Valid Specialization specialization) {
-        if (checkForSpecialization(specialization)) return 0L;
+        if (specializationExisits(specialization)) return 0L;
         specializationRepository.save(specialization);
         return specialization.getId();
     }
@@ -70,13 +70,15 @@ public class SpecializationRestController {
         return specialization.getId();
     }
 
-    @DeleteMapping(path = "/${specializationId}")
+/*
+    @DeleteMapping(path = "/{specializationId}")
     public @ResponseBody String deleteSpecialization (@PathVariable Long specializationId) {
         specializationRepository.deleteById(specializationId);
         return "Specialization deleted";
     }
+*/
 
-    private boolean checkForSpecialization(Specialization specialization) {
+    private boolean specializationExisits(Specialization specialization) {
         return listSpecializations().stream()
                 .anyMatch(s -> s.getTypeOfSpecialization().equals(specialization.getTypeOfSpecialization()));
     }
