@@ -3,7 +3,6 @@ package pl.sda.medicalcrm.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.Specialization;
 import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.repository.SpecializationRepository;
@@ -12,7 +11,6 @@ import pl.sda.medicalcrm.repository.UserRepository;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Controller
 @RequestMapping(path = "/specializations")
@@ -25,7 +23,8 @@ public class SpecializationRestController {
     private UserRepository userRepository;
 
     @GetMapping
-    public @ResponseBody List<Specialization> listSpecializations(){
+    public @ResponseBody
+    List<Specialization> listSpecializations() {
         return (List<Specialization>) specializationRepository.findAll();
     }
 /*
@@ -54,18 +53,20 @@ public class SpecializationRestController {
     }*/
 
 
-
-
     @PostMapping
-    public @ResponseBody Long createSpecialization(@RequestBody @Valid Specialization specialization){
-        if (checkForSpecialization(specialization )){
-            specializationRepository.save(specialization);
-            return specialization.getId();
-        } else return 0L;
+    public @ResponseBody
+    Long createSpecialization(@RequestBody @Valid Specialization specialization) {
+        if (checkForSpecialization(specialization)) return 0L;
+        specializationRepository.save(specialization);
+        return specialization.getId();
     }
+
+
+
     @PutMapping(path = "/{doctorId}/{specializationId}")
-    public @ResponseBody Long connectSpecializationDoctor(@PathVariable Long doctorId,
-                                                          @PathVariable Long specializationId) {
+    public @ResponseBody
+    Long connectSpecializationDoctor(@PathVariable Long doctorId,
+                                     @PathVariable Long specializationId) {
         Optional<Specialization> specializationOptional = specializationRepository.findById(specializationId);
         if (!specializationOptional.isPresent()) return 0L;
         Optional<User> doctorOptional = userRepository.findById(doctorId);
@@ -77,16 +78,12 @@ public class SpecializationRestController {
         specializationRepository.save(specialization);
         return specialization.getId();
     }
+
     private boolean checkForSpecialization(Specialization specialization) {
-        if (listSpecializations().contains(specialization )) {
-
-
-            return true;
-        } else {
-            return false;
-
-        }
-
+        return listSpecializations().stream()
+                .anyMatch(s -> s.getTypeOfSpecialization().equals(specialization.getTypeOfSpecialization()));
     }
 
 }
+
+
