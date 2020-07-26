@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.User;
+import pl.sda.medicalcrm.enums.TypeOfUser;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
@@ -33,5 +35,10 @@ public class DoctorService {
         doctor.setId(id);
         userRepository.save(doctor);
         return doctor.getId();
+    }
+
+    public List<User> getAllDoctorsList() {
+        List<User> users = (List<User>) userRepository.findAll();
+        return users.stream().filter(u -> u.getTypeOfUser().equals(TypeOfUser.DOCTOR)).collect(Collectors.toList());
     }
 }

@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.Doctor;
+import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.service.DoctorService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/doctors")
@@ -18,12 +20,18 @@ public class DoctorRestController {
 
     @PostMapping
     public @ResponseBody
-    Long registerNewCrmSpecialist(@RequestBody @Valid Doctor doctor) {
+    Long registerNewDoctor(@RequestBody @Valid Doctor doctor) {
         return doctorService.registerNewDoctor(doctor);
     }
 
+    @GetMapping
+    public @ResponseBody
+    List<User> getAllDoctorsList(){
+        return doctorService.getAllDoctorsList();
+    }
+
     @PutMapping(path = "/{userId}")
-    public @ResponseBody Long changeCrmSpecialistData(@PathVariable Long userId,
+    public @ResponseBody Long changeDoctorData(@PathVariable Long userId,
                                                       @RequestBody @Valid Doctor doctor) {
         return doctorService.changeDoctorData(userId, doctor);
     }
