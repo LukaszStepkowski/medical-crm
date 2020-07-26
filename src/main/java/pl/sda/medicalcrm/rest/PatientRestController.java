@@ -37,4 +37,9 @@ public class PatientRestController {
         return patientService.changePatientData(userId, patient);
     }
 
+    @GetMapping(path = "/{userId}")
+    public @ResponseBody Patient getPatientData(@PathVariable Long userId) {
+        return patientService.getPatientData(userId);
+    }
+
 }

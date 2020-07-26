@@ -7,6 +7,7 @@ import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientService {
@@ -27,6 +28,11 @@ public class PatientService {
         patient.setId(id);
         userRepository.save(patient);
         return patient.getId();
+    }
+
+    public Patient getPatientData(Long id) {
+        Optional<User> optionalPatient = userRepository.findById(id);
+        return (Patient) optionalPatient.get();
     }
 
     private boolean isLoginAlreadyInDataBase(User user) {
