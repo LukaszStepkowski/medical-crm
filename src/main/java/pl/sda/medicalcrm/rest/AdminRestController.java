@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.Admin;
+import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.service.AdminService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admins")
@@ -31,5 +33,11 @@ public class AdminRestController {
     @DeleteMapping(path = "/{userId}")
     public @ResponseBody String deleteAdmin(@PathVariable Long userId) {
         return adminService.deleteAdmin(userId);
+    }
+
+    @GetMapping
+    public @ResponseBody
+    List<User> getAllAdminsList(){
+        return adminService.getAllAdminsList();
     }
 }

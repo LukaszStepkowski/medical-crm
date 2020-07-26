@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.Admin;
 import pl.sda.medicalcrm.entity.User;
+import pl.sda.medicalcrm.enums.TypeOfUser;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminService {
@@ -38,5 +40,10 @@ public class AdminService {
     public String deleteAdmin(Long userId){
         userRepository.deleteById(userId);
         return "Admin Deleted";
+    }
+
+    public List<User> getAllAdminsList() {
+        List<User> users = (List<User>) userRepository.findAll();
+        return users.stream().filter(u -> u.getTypeOfUser().equals(TypeOfUser.ADMIN)).collect(Collectors.toList());
     }
 }
