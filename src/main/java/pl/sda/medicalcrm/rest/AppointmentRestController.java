@@ -22,4 +22,9 @@ public class AppointmentRestController {
         return appointmentService.makeNewAppointment(appointment);
     }
 
+    @DeleteMapping(path = "/{appointmentId}")
+    public @ResponseBody String deleteAppointment(@PathVariable Long appointmentId) {
+        return appointmentService.deleteAppointment(appointmentId);
+    }
+
 }

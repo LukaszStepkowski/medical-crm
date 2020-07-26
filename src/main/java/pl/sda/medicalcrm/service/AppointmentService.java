@@ -27,5 +27,10 @@ public class AppointmentService {
         return appointment.getId();
     }
 
+    public String deleteAppointment(Long appointmentId){
+        appointmentRepository.deleteById(appointmentId);
+        return "Appointment Deleted";
+    }
+
 }
 
