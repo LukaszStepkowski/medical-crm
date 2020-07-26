@@ -10,6 +10,7 @@ import pl.sda.medicalcrm.service.EmailService;
 import pl.sda.medicalcrm.service.PatientService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/patients")
@@ -40,6 +41,12 @@ public class PatientRestController {
     @GetMapping(path = "/{userId}")
     public @ResponseBody Patient getPatientData(@PathVariable Long userId) {
         return patientService.getPatientData(userId);
+    }
+
+    @GetMapping
+    public @ResponseBody
+    List<User> getAllPatientsList() {
+        return patientService.getAllPatientsList();
     }
 
 }

@@ -8,6 +8,7 @@ import pl.sda.medicalcrm.repository.UserRepository;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PatientService {
@@ -33,6 +34,11 @@ public class PatientService {
     public Patient getPatientData(Long id) {
         Optional<User> optionalPatient = userRepository.findById(id);
         return (Patient) optionalPatient.get();
+    }
+
+    public List<User> getAllPatientsList() {
+        List<User> users = (List<User>) userRepository.findAll();
+        return users.stream().filter(u -> u.getLogin().contains("@")).collect(Collectors.toList());
     }
 
     private boolean isLoginAlreadyInDataBase(User user) {
