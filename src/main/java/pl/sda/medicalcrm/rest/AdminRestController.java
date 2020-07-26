@@ -27,4 +27,9 @@ public class AdminRestController {
                                                 @RequestBody @Valid Admin admin) {
         return adminService.changeAdminData(userId, admin);
     }
+
+    @DeleteMapping(path = "/{userId}")
+    public @ResponseBody String deleteAdmin(@PathVariable Long userId) {
+        return adminService.deleteAdmin(userId);
+    }
 }

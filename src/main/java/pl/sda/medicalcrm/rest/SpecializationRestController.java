@@ -11,6 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "/specializations")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SpecializationRestController {
 
     @Autowired

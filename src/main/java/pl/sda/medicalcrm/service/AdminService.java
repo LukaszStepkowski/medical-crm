@@ -34,4 +34,9 @@ public class AdminService {
         userRepository.save(admin);
         return admin.getId();
     }
+
+    public String deleteAdmin(Long userId){
+        userRepository.deleteById(userId);
+        return "Admin Deleted";
+    }
 }
