@@ -2,13 +2,14 @@ package pl.sda.medicalcrm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sda.medicalcrm.entity.Admin;
 import pl.sda.medicalcrm.entity.CrmSpecialist;
 import pl.sda.medicalcrm.entity.User;
+import pl.sda.medicalcrm.enums.TypeOfUser;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CrmSpecialistService {
@@ -34,5 +35,10 @@ public class CrmSpecialistService {
         crmSpecialist.setId(id);
         userRepository.save(crmSpecialist);
         return crmSpecialist.getId();
+    }
+
+    public List<User> getAllCrmSpecialistsList(){
+        List<User> allUsers = (List<User>) userRepository.findAll();
+        return allUsers.stream().filter(u -> u.getTypeOfUser().equals(TypeOfUser.CRM_SPECIALIST)).collect(Collectors.toList());
     }
 }

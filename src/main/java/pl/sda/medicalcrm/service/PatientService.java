@@ -3,6 +3,7 @@ package pl.sda.medicalcrm.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.*;
+import pl.sda.medicalcrm.enums.TypeOfUser;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
@@ -38,7 +39,7 @@ public class PatientService {
 
     public List<User> getAllPatientsList() {
         List<User> users = (List<User>) userRepository.findAll();
-        return users.stream().filter(u -> u.getLogin().contains("@")).collect(Collectors.toList());
+        return users.stream().filter(u -> u.getTypeOfUser().equals(TypeOfUser.PATIENT)).collect(Collectors.toList());
     }
 
     private boolean isLoginAlreadyInDataBase(User user) {

@@ -7,6 +7,7 @@ import pl.sda.medicalcrm.entity.Address;
 import pl.sda.medicalcrm.entity.Clinic;
 import pl.sda.medicalcrm.repository.AddressRepository;
 import pl.sda.medicalcrm.repository.ClinicRepository;
+import pl.sda.medicalcrm.service.ClinicService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -14,36 +15,22 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "/clinics")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClinicRestController {
 
     @Autowired
-    private ClinicRepository clinicRepository;
-
-    @Autowired
-    private AddressRepository addressRepository;
-
-    @Autowired
-    private AddressRestController addressRestController;
-
+    private ClinicService clinicService;
 
     @GetMapping
     public @ResponseBody
-    List<Clinic> listClinic() {
-        return (List<Clinic>) clinicRepository.findAll();
+    List<Clinic> getAllClinicsList() {
+        return clinicService.getAllClinicsList();
     }
 
-//    @PostMapping
-//    public @ResponseBody
-//    Long createClinic(@RequestBody @Valid Long addressId) {
-//
-//        Address address = addressRestController.findAddress(addressId);
-//
-//        Clinic clinic = new Clinic();
-//        clinic.setAddress(address);
-//        clinicRepository.save(clinic);
-//        return clinic.getId();
-//    }
-
+    @PostMapping
+    public @ResponseBody Long createNewClinic(@RequestBody Address address){
+        return clinicService.createNewClinic(address);
+    }
 
 }
 
