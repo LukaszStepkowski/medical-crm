@@ -3,6 +3,7 @@ package pl.sda.medicalcrm.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -22,6 +23,7 @@ public class Specialization {
 
     @NotEmpty
     @NotBlank
+    @NonNull
     private String typeOfSpecialization;
 
     @OneToMany(cascade = CascadeType.ALL)

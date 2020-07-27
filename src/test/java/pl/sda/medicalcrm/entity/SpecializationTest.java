@@ -46,4 +46,20 @@ class SpecializationTest {
         assertEquals(readSpecialization.getId(), specialization.getId());
     }
 
+
+    @Test
+    @Transactional
+    void testDeleteSpecialization(){
+
+        //given
+        var specializationId = 19;
+
+
+
+
+
+
+
+    }
+
 }
