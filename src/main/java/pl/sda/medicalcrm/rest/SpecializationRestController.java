@@ -29,14 +29,9 @@ public class SpecializationRestController {
         return specializationService.createNewSpecialization(specialization);
     }
 
-    @DeleteMapping(path = "/{specializationId}")
-    public @ResponseBody String deleteSpecialization (@PathVariable Long specializationId) {
-        return specializationService.deleteSpecialization(specializationId);
-    }
-
     @PutMapping(path = "/{specializationId}")
     public @ResponseBody Long addDoctorToSpecialization (@PathVariable Long specializationId,
-                                                         @RequestBody @Valid Long doctorId) {
+                                                         @RequestBody Long doctorId) {
         return specializationService.addDoctorToSpecialization(specializationId, doctorId);
     }
 

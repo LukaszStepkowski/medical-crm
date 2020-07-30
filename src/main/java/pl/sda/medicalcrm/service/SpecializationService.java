@@ -26,14 +26,9 @@ public class SpecializationService {
 
     @Transactional
     public Long createNewSpecialization(Specialization specialization) {
-        if (!isSpecializationInDataBase(specialization)) return 0L;
+        if (isSpecializationInDataBase(specialization)) return 0L;
         specializationRepository.save(specialization);
         return specialization.getId();
-    }
-
-    public String deleteSpecialization(Long specializationId){
-        specializationRepository.deleteById(specializationId);
-        return "Specialization Deleted";
     }
 
     @Transactional
