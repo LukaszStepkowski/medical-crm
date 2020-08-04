@@ -18,9 +18,13 @@ public class AppointmentRestController {
 
     @PostMapping
     public @ResponseBody
-    Long makeNewAppointment(@RequestBody @Valid Appointment appointment){
-        return appointmentService.makeNewAppointment(appointment);
+    Long makeNewAppointment(@RequestBody @Valid Appointment appointment,
+                            @RequestParam String patientId,
+                            @RequestParam String specializationId,
+                            @RequestParam String clinicId){
+        return appointmentService.makeNewAppointment(appointment, patientId, specializationId, clinicId);
     }
+    //TODO change params to Long
 
     @DeleteMapping(path = "/{appointmentId}")
     public @ResponseBody String deleteAppointment(@PathVariable Long appointmentId) {

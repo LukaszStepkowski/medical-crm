@@ -1,5 +1,6 @@
 package pl.sda.medicalcrm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jdk.jfr.BooleanFlag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,24 +25,25 @@ public class Appointment {
     private Long id;
 
     @DateTimeFormat
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "Europe/Warsaw")
     private LocalDateTime appointmentDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Specialization specialization;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Examination> examinations;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Clinic clinic;
 
     @BooleanFlag
     private boolean isOnline;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Prescription prescription;
 
 }
