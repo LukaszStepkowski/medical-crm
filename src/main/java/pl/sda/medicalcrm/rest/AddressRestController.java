@@ -4,57 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.Address;
-import pl.sda.medicalcrm.repository.AddressRepository;
+import pl.sda.medicalcrm.service.AddressService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/addresses")
 public class AddressRestController {
 
     @Autowired
-    private AddressRepository addressRepository;
+    private AddressService addressService;
 
     @GetMapping
-    public @ResponseBody
-    List<Address> listAddresses() {
-        return (List<Address>) addressRepository.findAll();
+    public @ResponseBody List<Address> getListOfAllAddresses() {
+        return addressService.getListOfAllAddresses();
     }
 
     @PostMapping
     public @ResponseBody
     Long createAddress(@RequestBody @Valid Address address) {
-        if (checkForAddress(address)) return 0L;
-
-        addressRepository.save(address);
-        return address.getId();
+        return addressService.createAddress(address);
     }
-
-//    @GetMapping(path = "/addresses/{addressId}")
-//    public @ResponseBody
-//    Address findAddress(@PathVariable Long addressId) {
-//        Optional<Address> addressOptional = addressRepository.findById(addressId);
-//        return addressOptional.get();
-//    }
-
-
-    private boolean checkForAddress(Address address) {
-        return listAddresses().stream()
-                .anyMatch(s -> s.getCity().equals(address.getCity())
-                        && s.getCountry().equals(address.getCountry())
-                        && s.getStreet().equals((address.getStreet()))
-                        && s.getZipCode().equals(address.getZipCode())
-                );
-    }
-//
-//    protected boolean checkForAddressById(Long addressId) {
-//        return listAddresses().stream()
-//                .anyMatch(s -> s.getId().equals(addressId)
-//                );
-//    }
-
 }
 
 

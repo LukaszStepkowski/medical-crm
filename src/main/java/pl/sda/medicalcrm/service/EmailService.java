@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import pl.sda.medicalcrm.dto.*;
 import pl.sda.medicalcrm.entity.*;
 
 import javax.transaction.Transactional;
