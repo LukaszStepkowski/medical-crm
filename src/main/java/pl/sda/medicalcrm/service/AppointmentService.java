@@ -3,6 +3,7 @@ package pl.sda.medicalcrm.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.Appointment;
+import pl.sda.medicalcrm.entity.Examination;
 import pl.sda.medicalcrm.repository.AppointmentRepository;
 import pl.sda.medicalcrm.repository.ClinicRepository;
 import pl.sda.medicalcrm.repository.SpecializationRepository;
@@ -49,6 +50,14 @@ public class AppointmentService {
         appointment.setClinic(null);
         appointmentRepository.deleteById(appointmentId);
         return "Appointment Deleted";
+    }
+
+    public String addExaminationResults(Examination examination, Long appointmentId) {
+        Appointment appointment = appointmentRepository.findById(appointmentId).get();
+        appointment.getExaminations().add(examination);
+        appointment.setId(appointmentId);
+        appointmentRepository.save(appointment);
+        return "Examination Added";
     }
 
 }
