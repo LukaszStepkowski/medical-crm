@@ -50,6 +50,7 @@ public class CreateAppointmentTest {
         LocalDateTime date = LocalDateTime.now();
 
         var clinic = new Clinic();
+        clinic.setClinicName("Moja klinika");
         clinic.setAddress(address);
 
         var prescription = new Prescription();

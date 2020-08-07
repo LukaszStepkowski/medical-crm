@@ -64,6 +64,7 @@ class AppointmentServiceTest {
         address.setZipCode("00-756");
 
         var clinic = new Clinic();
+        clinic.setClinicName("Moja klinika");
         clinic.setAddress(address);
 
         var prescription = new Prescription();
