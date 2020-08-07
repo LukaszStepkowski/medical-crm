@@ -19,10 +19,6 @@ public class Clinic {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @NotEmpty
-    private String clinicName;
-
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 

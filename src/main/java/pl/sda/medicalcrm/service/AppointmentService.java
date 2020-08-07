@@ -43,6 +43,10 @@ public class AppointmentService {
     }
 
     public String deleteAppointment(Long appointmentId){
+        Appointment appointment = appointmentRepository.findById(appointmentId).get();
+        appointment.setUser(null);
+        appointment.setSpecialization(null);
+        appointment.setClinic(null);
         appointmentRepository.deleteById(appointmentId);
         return "Appointment Deleted";
     }
