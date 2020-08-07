@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.*;
 import pl.sda.medicalcrm.repository.ClinicRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -13,32 +14,24 @@ public class ClinicService {
     @Autowired
     private ClinicRepository clinicRepository;
 
-    public ClinicService() {
-    }
-
-    public List<Clinic> getListOfAllClinics() {
+    public List<Clinic> getAllClinicsList(){
         return (List<Clinic>) clinicRepository.findAll();
     }
 
-    public Long createClinic(Clinic clinic) {
-        if (doesClinicExists(clinic)) return 0L;
-
+    @Transactional
+    public Long createNewClinic(Address address){
+        if (isClinicAlreadyInDataBase(address)) return 0L;
+        Clinic clinic = new Clinic();
+        clinic.setAddress(address);
         clinicRepository.save(clinic);
         return clinic.getId();
     }
 
-    public boolean doesClinicExists(Clinic clinic) {
-        return getListOfAllClinics().stream()
-                .anyMatch(s -> s.getClinicName().equals(clinic.getClinicName())
-                );
+    private boolean isClinicAlreadyInDataBase(Address address){
+        List<Clinic> clinics = getAllClinicsList();
+        return clinics.stream().anyMatch(c -> c.getAddress().getStreet().equals(address.getStreet())
+                && c.getAddress().getCity().equals(address.getCity()));
     }
-
-    public Long saveClinic(Clinic clinic) {
-        clinicRepository.save(clinic);
-        return clinic.getId();
-    }
-
-
 }
 
 

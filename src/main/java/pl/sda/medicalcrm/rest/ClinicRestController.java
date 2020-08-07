@@ -18,35 +18,18 @@ import java.util.List;
 @RequestMapping(path = "/clinics")
 public class ClinicRestController {
 
-
-    @Autowired
-    private AddressService addressService;
-
     @Autowired
     private ClinicService clinicService;
 
     @GetMapping
     public @ResponseBody
-    List<Clinic> listClinic() {
-        return clinicService.getListOfAllClinics();
+    List<Clinic> getAllClinicsList() {
+        return clinicService.getAllClinicsList();
     }
 
     @PostMapping
-    public @ResponseBody
-    Long createClinic(@RequestBody @Valid Clinic clinic) {
-        return clinicService.createClinic(clinic);
-    }
-
-    @PutMapping(path = "/{clinicId}/{addressId}")
-    public @ResponseBody
-    Long setClinicAddress(@PathVariable Long clinicId,
-                          @PathVariable Long addressId,
-                          @RequestBody @Valid Clinic clinic,
-                          @RequestBody @Valid Address address) {
-
-        clinic.setId(clinicId);
-        clinic.setAddress(address);
-        return clinicService.saveClinic(clinic);
+    public @ResponseBody Long createNewClinic(@RequestBody Address address){
+        return clinicService.createNewClinic(address);
     }
 }
 
