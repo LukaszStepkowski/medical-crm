@@ -3,6 +3,7 @@ package pl.sda.medicalcrm.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import pl.sda.medicalcrm.enums.TypeOfUser;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ import javax.validation.constraints.Pattern;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class User {
+public abstract class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +34,13 @@ public abstract class User {
 
     @Enumerated(EnumType.STRING)
     private TypeOfUser typeOfUser;
+
+    private String role;
+
+
+
+
+
 
 }
 
