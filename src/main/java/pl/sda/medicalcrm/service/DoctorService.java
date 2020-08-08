@@ -44,15 +44,15 @@ public class DoctorService {
         return doctor.getId();
     }
 
-    public Doctor getDoctorData(Long id) {
-        Optional<User> optionalDoctor = userRepository.findById(id);
-        return (Doctor) optionalDoctor.get();
-    }
-
     @Transactional
     public String deleteDoctor(Long doctorId){
         userRepository.deleteById(doctorId);
         return "Doctor Deleted";
+    }
+
+    public Doctor getDoctorData(Long id) {
+        Optional<User> optionalDoctor = userRepository.findById(id);
+        return (Doctor) optionalDoctor.get();
     }
 
     public List<User> getAllDoctorsList() {

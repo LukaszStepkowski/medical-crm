@@ -37,6 +37,12 @@ public class PatientService {
         return patient.getId();
     }
 
+    @Transactional
+    public String deletePatient(Long patientId){
+        userRepository.deleteById(patientId);
+        return "Patient Deleted";
+    }
+
     public Patient getPatientData(Long id) {
         Optional<User> optionalPatient = userRepository.findById(id);
         return (Patient) optionalPatient.get();

@@ -42,6 +42,11 @@ public class PatientRestController {
         return patientService.getPatientData(userId);
     }
 
+    @DeleteMapping(path = "/{patientId}")
+    public @ResponseBody String deletePatient (@PathVariable Long patientId) {
+        return patientService.deletePatient(patientId);
+    }
+
     @GetMapping
     public @ResponseBody
     List<User> getAllPatientsList() {
