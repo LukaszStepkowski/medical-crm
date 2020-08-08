@@ -38,7 +38,7 @@ class AppointmentServiceTest {
     void testCreateAppointment() throws MailjetSocketTimeoutException, MailjetException {
         //given
         var patient = new Patient();
-        patient.setLogin("medicalcrm23@gmail.com");
+        patient.setUsername("medicalcrm23@gmail.com");
         patient.setPassword("Password1!");
         patient.setName("Jan");
         patient.setSurname("Kowalski");
@@ -49,7 +49,7 @@ class AppointmentServiceTest {
         doctor.setName("Karol");
         doctor.setNpwz("1234567");
         doctor.setPassword("Password2!");
-        doctor.setLogin("test@test.com.pl");
+        doctor.setUsername("test@test.com.pl");
 
         var specialization = new Specialization();
         specialization.setTypeOfSpecialization("Kardiolog");

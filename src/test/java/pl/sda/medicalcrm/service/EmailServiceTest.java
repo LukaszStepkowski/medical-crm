@@ -25,7 +25,7 @@ public class EmailServiceTest {
     void TestCreatePatientWithSendingEmail() throws MailjetSocketTimeoutException, MailjetException, NoSuchFieldException {
         //given
         var patient = new Patient();
-        patient.setLogin("medicalcrm23@gmail.com");
+        patient.setUsername("medicalcrm23@gmail.com");
         patient.setPassword("password1!");
         patient.setName("Jan");
         patient.setSurname("Kowalski");

@@ -44,6 +44,6 @@ public class PatientService {
 
     private boolean isLoginAlreadyInDataBase(User user) {
         List<User> allUsers = (List<User>) userRepository.findAll();
-        return allUsers.stream().anyMatch(u -> u.getLogin().equals(user.getLogin()));
+        return allUsers.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()));
     }
 }

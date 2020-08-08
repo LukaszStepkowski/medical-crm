@@ -1,6 +1,7 @@
 package pl.sda.medicalcrm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.User;
@@ -15,16 +16,21 @@ import java.util.stream.Collectors;
 public class DoctorService {
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+    @Autowired
     private UserRepository userRepository;
 
     private boolean isLoginAlreadyInDataBase(User user) {
         List<User> allUsers = (List<User>) userRepository.findAll();
-        return allUsers.stream().anyMatch(u -> u.getLogin().equals(user.getLogin()));
+        return allUsers.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()));
     }
 
     @Transactional
     public Long registerNewDoctor (Doctor doctor) {
         if (isLoginAlreadyInDataBase(doctor)) return 0L;
+        doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
         userRepository.save(doctor);
         return doctor.getId();
     }

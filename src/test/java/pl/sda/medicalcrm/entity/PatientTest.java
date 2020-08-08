@@ -19,7 +19,7 @@ public class PatientTest {
     void TestCreatePatient(){
         //given
         var patient = new Patient();
-        patient.setLogin("test@test.com.pl");
+        patient.setUsername("test@test.com.pl");
         patient.setPassword("password1@");
         patient.setName("Jan");
         patient.setSurname("Kowalski");
