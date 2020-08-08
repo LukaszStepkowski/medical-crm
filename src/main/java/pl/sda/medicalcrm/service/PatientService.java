@@ -17,11 +17,12 @@ public class PatientService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserRepository userRepository;
 
     @Transactional
-    public Long registerNewPatient (Patient patient) {
+    public Long registerNewPatient(Patient patient) {
         if (isLoginAlreadyInDataBase(patient)) return 0L;
         patient.setPassword(passwordEncoder.encode(patient.getPassword()));
         userRepository.save(patient);
@@ -29,7 +30,7 @@ public class PatientService {
     }
 
     @Transactional
-    public Long changePatientData(Long id, Patient patient){
+    public Long changePatientData(Long id, Patient patient) {
         if (!userRepository.findById(id).isPresent()) return 0L;
         patient.setId(id);
         userRepository.save(patient);

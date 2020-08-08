@@ -18,7 +18,6 @@ public class DoctorService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     @Autowired
     private UserRepository userRepository;
 
@@ -28,7 +27,7 @@ public class DoctorService {
     }
 
     @Transactional
-    public Long registerNewDoctor (Doctor doctor) {
+    public Long registerNewDoctor(Doctor doctor) {
         if (isLoginAlreadyInDataBase(doctor)) return 0L;
         doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
         userRepository.save(doctor);
@@ -36,7 +35,7 @@ public class DoctorService {
     }
 
     @Transactional
-    public Long changeDoctorData(Long id, Doctor doctor){
+    public Long changeDoctorData(Long id, Doctor doctor) {
         if (!userRepository.findById(id).isPresent()) return 0L;
         doctor.setId(id);
         userRepository.save(doctor);

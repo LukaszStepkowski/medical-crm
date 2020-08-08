@@ -1,6 +1,7 @@
 package pl.sda.medicalcrm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.Admin;
 import pl.sda.medicalcrm.entity.User;
@@ -15,6 +16,9 @@ import java.util.stream.Collectors;
 public class AdminService {
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private UserRepository userRepository;
 
     private boolean isLoginAlreadyInDataBase(User user) {
@@ -25,6 +29,7 @@ public class AdminService {
     @Transactional
     public Long registerNewAdmin (Admin admin) {
         if (isLoginAlreadyInDataBase(admin)) return 0L;
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         userRepository.save(admin);
         return admin.getId();
     }
