@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.*;
-import pl.sda.medicalcrm.service.EmailService;
+import pl.sda.medicalcrm.facade.PatientFacade;
 import pl.sda.medicalcrm.service.PatientService;
 
 import javax.validation.Valid;
@@ -21,25 +21,24 @@ public class PatientRestController {
     private PatientService patientService;
 
     @Autowired
-    private EmailService emailService;
+    private PatientFacade patientFacade;
 
     @PostMapping
-    public @ResponseBody Long RegisterNewPatient(@RequestBody @Valid Patient patient)
-            throws MailjetException, MailjetSocketTimeoutException {
-
-        Long response = patientService.registerNewPatient(patient);
-        if (response != 0) emailService.sendEmail(patient);
-        return response;
+    public @ResponseBody
+    Long RegisterNewPatient(@RequestBody @Valid Patient patient) throws MailjetSocketTimeoutException, MailjetException {
+        return patientFacade.registerNewPatient(patient);
     }
 
     @PutMapping(path = "/{userId}")
-    public @ResponseBody Long changePatientData(@PathVariable Long userId,
-                                                 @RequestBody @Valid Patient patient){
+    public @ResponseBody
+    Long changePatientData(@PathVariable Long userId,
+                           @RequestBody @Valid Patient patient) {
         return patientService.changePatientData(userId, patient);
     }
 
     @GetMapping(path = "/{userId}")
-    public @ResponseBody Patient getPatientData(@PathVariable Long userId) {
+    public @ResponseBody
+    Patient getPatientData(@PathVariable Long userId) {
         return patientService.getPatientData(userId);
     }
 
