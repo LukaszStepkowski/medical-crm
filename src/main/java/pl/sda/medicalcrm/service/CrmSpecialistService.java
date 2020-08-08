@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.CrmSpecialist;
+import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.enums.TypeOfUser;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +42,17 @@ public class CrmSpecialistService {
         crmSpecialist.setId(id);
         userRepository.save(crmSpecialist);
         return crmSpecialist.getId();
+    }
+
+    @Transactional
+    public String deleteCrmSpecialist(Long id){
+        userRepository.deleteById(id);
+        return "CrmSpecialist Deleted";
+    }
+
+    public CrmSpecialist getCrmSpecialistData(Long id) {
+        Optional<User> optionalCrmSpecialist = userRepository.findById(id);
+        return (CrmSpecialist) optionalCrmSpecialist.get();
     }
 
     public List<User> getAllCrmSpecialistsList(){

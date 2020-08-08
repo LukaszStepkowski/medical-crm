@@ -43,7 +43,7 @@ public class DoctorRestController {
         return doctorService.getDoctorData(userId);
     }
 
-    @DeleteMapping(path = "/{doctorId}")
+    @DeleteMapping(path = "/{userId}")
     public @ResponseBody String deleteDoctor (@PathVariable Long doctorId) {
         return doctorService.deleteDoctor(doctorId);
     }
