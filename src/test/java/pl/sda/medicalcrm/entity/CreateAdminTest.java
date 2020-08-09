@@ -19,7 +19,7 @@ public class CreateAdminTest {
     void createAdminTest(){
         //given
         var admin = new Admin();
-        admin.setLogin("test@test.com.pl");
+        admin.setUsername("test@test.com.pl");
         admin.setPassword("Password1!");
         admin.setName("Jan");
         admin.setSurname("Kowalski");

@@ -28,7 +28,7 @@ class SpecializationTest {
         doctor.setName("Karol");
         doctor.setNpwz("1234567");
         doctor.setPassword("Password2!");
-        doctor.setLogin("test@test.com.pl");
+        doctor.setUsername("test@test.com.pl");
 
         var specialization = new Specialization();
         specialization.setTypeOfSpecialization("Kardiolog");

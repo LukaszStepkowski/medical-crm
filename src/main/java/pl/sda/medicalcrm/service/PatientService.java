@@ -1,6 +1,7 @@
 package pl.sda.medicalcrm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.*;
 import pl.sda.medicalcrm.enums.TypeOfUser;
@@ -15,21 +16,31 @@ import java.util.stream.Collectors;
 public class PatientService {
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Transactional
-    public Long registerNewPatient (Patient patient) {
+    public Long registerNewPatient(Patient patient) {
         if (isLoginAlreadyInDataBase(patient)) return 0L;
+        patient.setPassword(passwordEncoder.encode(patient.getPassword()));
         userRepository.save(patient);
         return patient.getId();
     }
 
     @Transactional
-    public Long changePatientData(Long id, Patient patient){
+    public Long changePatientData(Long id, Patient patient) {
         if (!userRepository.findById(id).isPresent()) return 0L;
         patient.setId(id);
         userRepository.save(patient);
         return patient.getId();
+    }
+
+    @Transactional
+    public String deletePatient(Long patientId){
+        userRepository.deleteById(patientId);
+        return "Patient Deleted";
     }
 
     public Patient getPatientData(Long id) {
@@ -44,6 +55,6 @@ public class PatientService {
 
     private boolean isLoginAlreadyInDataBase(User user) {
         List<User> allUsers = (List<User>) userRepository.findAll();
-        return allUsers.stream().anyMatch(u -> u.getLogin().equals(user.getLogin()));
+        return allUsers.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()));
     }
 }
