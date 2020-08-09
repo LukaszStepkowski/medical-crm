@@ -34,6 +34,7 @@ public class CrmSpecialistService {
     public Long registerNewCrmSpecialist(CrmSpecialist crmSpecialist) {
         if (isLoginAlreadyInDataBase(crmSpecialist)) throw new UserAlreadyInDatabaseException();
         crmSpecialist.setPassword(passwordEncoder.encode(crmSpecialist.getPassword()));
+        crmSpecialist.setRole("CRMSPECIALIST");
         userRepository.save(crmSpecialist);
         return crmSpecialist.getId();
     }
