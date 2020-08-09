@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.Doctor;
-import pl.sda.medicalcrm.entity.Patient;
 import pl.sda.medicalcrm.entity.User;
-import pl.sda.medicalcrm.enums.TypeOfUser;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
@@ -57,6 +55,6 @@ public class DoctorService {
 
     public List<User> getAllDoctorsList() {
         List<User> users = (List<User>) userRepository.findAll();
-        return users.stream().filter(u -> u.getTypeOfUser().equals(TypeOfUser.DOCTOR)).collect(Collectors.toList());
+        return users.stream().filter(u -> u.getRole().equals("DOCTOR")).collect(Collectors.toList());
     }
 }

@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("doctor")
@@ -35,5 +36,8 @@ public class Doctor extends User {
     @NotBlank
     @Pattern(regexp = "\\w[a-zA-Z]{1,}")
     private String surname;
+
+    @ManyToMany
+    private List<Specialization> specializations;
 
 }
