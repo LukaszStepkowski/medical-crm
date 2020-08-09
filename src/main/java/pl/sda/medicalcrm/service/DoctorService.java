@@ -32,6 +32,7 @@ public class DoctorService {
     public Long registerNewDoctor(Doctor doctor) {
         if (isLoginAlreadyInDataBase(doctor)) throw new UserAlreadyInDatabaseException();
         doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
+        doctor.setRole("DOCTOR");
         userRepository.save(doctor);
         return doctor.getId();
     }

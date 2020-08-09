@@ -31,6 +31,7 @@ public class AdminService {
     public Long registerNewAdmin (Admin admin) {
         if (isLoginAlreadyInDataBase(admin)) throw new UserAlreadyInDatabaseException();
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        admin.setRole("ADMIN");
         userRepository.save(admin);
         return admin.getId();
     }
