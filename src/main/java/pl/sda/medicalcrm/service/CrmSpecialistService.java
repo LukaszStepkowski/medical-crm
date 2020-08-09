@@ -7,6 +7,8 @@ import pl.sda.medicalcrm.entity.CrmSpecialist;
 import pl.sda.medicalcrm.entity.Doctor;
 import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.enums.TypeOfUser;
+import pl.sda.medicalcrm.exceptions.UserAlreadyInDatabaseException;
+import pl.sda.medicalcrm.exceptions.UserNotFoundException;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
@@ -30,7 +32,7 @@ public class CrmSpecialistService {
 
     @Transactional
     public Long registerNewCrmSpecialist(CrmSpecialist crmSpecialist) {
-        if (isLoginAlreadyInDataBase(crmSpecialist)) return 0L;
+        if (isLoginAlreadyInDataBase(crmSpecialist)) throw new UserAlreadyInDatabaseException();
         crmSpecialist.setPassword(passwordEncoder.encode(crmSpecialist.getPassword()));
         userRepository.save(crmSpecialist);
         return crmSpecialist.getId();
@@ -38,7 +40,7 @@ public class CrmSpecialistService {
 
     @Transactional
     public Long changeCrmSpecialistData(Long id, CrmSpecialist crmSpecialist){
-        if (!userRepository.findById(id).isPresent()) return 0L;
+        if (!userRepository.findById(id).isPresent()) throw new UserNotFoundException();
         crmSpecialist.setId(id);
         userRepository.save(crmSpecialist);
         return crmSpecialist.getId();
@@ -52,6 +54,7 @@ public class CrmSpecialistService {
 
     public CrmSpecialist getCrmSpecialistData(Long id) {
         Optional<User> optionalCrmSpecialist = userRepository.findById(id);
+        if (!optionalCrmSpecialist.isPresent()) throw new UserNotFoundException();
         return (CrmSpecialist) optionalCrmSpecialist.get();
     }
 
