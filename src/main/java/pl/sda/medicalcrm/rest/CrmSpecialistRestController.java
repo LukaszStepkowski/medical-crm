@@ -32,8 +32,8 @@ public class CrmSpecialistRestController {
     }
 
     @DeleteMapping(path = "/{userId}")
-    public @ResponseBody String deleteCrmSpecialist (@PathVariable Long id) {
-        return crmSpecialistService.deleteCrmSpecialist(id);
+    public @ResponseBody String deleteCrmSpecialist (@PathVariable Long userId) {
+        return crmSpecialistService.deleteCrmSpecialist(userId);
     }
 
     @GetMapping(path = "/{userId}")
