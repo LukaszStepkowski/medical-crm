@@ -28,22 +28,22 @@ public class Appointment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm", timezone = "Europe/Warsaw")
     private LocalDateTime appointmentDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Specialization specialization;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Examination> examinations;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Clinic clinic;
 
     @BooleanFlag
     private boolean isOnline;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Prescription prescription;
 
 }

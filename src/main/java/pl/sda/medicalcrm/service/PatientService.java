@@ -50,7 +50,7 @@ public class PatientService {
 
     public List<User> getAllPatientsList() {
         List<User> users = (List<User>) userRepository.findAll();
-        return users.stream().filter(u -> u.getTypeOfUser().equals(TypeOfUser.PATIENT)).collect(Collectors.toList());
+        return users.stream().filter(u -> u.getRole().equals("PATIENT")).collect(Collectors.toList());
     }
 
     private boolean isLoginAlreadyInDataBase(User user) {

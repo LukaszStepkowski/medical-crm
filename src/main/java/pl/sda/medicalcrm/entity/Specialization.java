@@ -24,7 +24,7 @@ public class Specialization {
     @NotBlank
     private String typeOfSpecialization;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<User> doctors;
 
 }

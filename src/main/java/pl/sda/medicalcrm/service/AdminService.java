@@ -49,6 +49,6 @@ public class AdminService {
 
     public List<User> getAllAdminsList() {
         List<User> users = (List<User>) userRepository.findAll();
-        return users.stream().filter(u -> u.getTypeOfUser().equals(TypeOfUser.ADMIN)).collect(Collectors.toList());
+        return users.stream().filter(u -> u.getRole().equals("ADMIN")).collect(Collectors.toList());
     }
 }

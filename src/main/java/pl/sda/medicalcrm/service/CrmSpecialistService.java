@@ -57,6 +57,6 @@ public class CrmSpecialistService {
 
     public List<User> getAllCrmSpecialistsList(){
         List<User> allUsers = (List<User>) userRepository.findAll();
-        return allUsers.stream().filter(u -> u.getTypeOfUser().equals(TypeOfUser.CRM_SPECIALIST)).collect(Collectors.toList());
+        return allUsers.stream().filter(u -> u.getRole().equals("CRMSPECIALIST")).collect(Collectors.toList());
     }
 }
