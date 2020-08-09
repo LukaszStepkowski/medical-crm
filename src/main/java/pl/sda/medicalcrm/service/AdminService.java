@@ -5,7 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.Admin;
 import pl.sda.medicalcrm.entity.User;
-import pl.sda.medicalcrm.enums.TypeOfUser;
+import pl.sda.medicalcrm.exceptions.UserAlreadyInDatabaseException;
+import pl.sda.medicalcrm.exceptions.UserNotFoundException;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
@@ -28,7 +29,7 @@ public class AdminService {
 
     @Transactional
     public Long registerNewAdmin (Admin admin) {
-        if (isLoginAlreadyInDataBase(admin)) return 0L;
+        if (isLoginAlreadyInDataBase(admin)) throw new UserAlreadyInDatabaseException();
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         userRepository.save(admin);
         return admin.getId();
@@ -36,7 +37,7 @@ public class AdminService {
 
     @Transactional
     public Long changeAdminData(Long id, Admin admin){
-        if (!userRepository.findById(id).isPresent()) return 0L;
+        if (!userRepository.findById(id).isPresent()) throw new UserNotFoundException();
         admin.setId(id);
         userRepository.save(admin);
         return admin.getId();

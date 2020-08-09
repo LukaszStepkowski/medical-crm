@@ -5,6 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.*;
 import pl.sda.medicalcrm.enums.TypeOfUser;
+import pl.sda.medicalcrm.exceptions.UserAlreadyInDatabaseException;
+import pl.sda.medicalcrm.exceptions.UserNotFoundException;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
@@ -23,7 +25,7 @@ public class PatientService {
 
     @Transactional
     public Long registerNewPatient(Patient patient) {
-        if (isLoginAlreadyInDataBase(patient)) return 0L;
+        if (isLoginAlreadyInDataBase(patient)) throw new UserAlreadyInDatabaseException();
         patient.setPassword(passwordEncoder.encode(patient.getPassword()));
         userRepository.save(patient);
         return patient.getId();
@@ -31,7 +33,7 @@ public class PatientService {
 
     @Transactional
     public Long changePatientData(Long id, Patient patient) {
-        if (!userRepository.findById(id).isPresent()) return 0L;
+        if (!userRepository.findById(id).isPresent()) throw new UserNotFoundException();
         patient.setId(id);
         userRepository.save(patient);
         return patient.getId();
@@ -45,6 +47,7 @@ public class PatientService {
 
     public Patient getPatientData(Long id) {
         Optional<User> optionalPatient = userRepository.findById(id);
+        if (!optionalPatient.isPresent()) throw new UserNotFoundException();
         return (Patient) optionalPatient.get();
     }
 
