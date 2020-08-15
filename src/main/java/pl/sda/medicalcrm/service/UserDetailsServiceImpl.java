@@ -19,6 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        //TODO deserialize json
         return userRepository.findByUsername(s).get();
     }
 
