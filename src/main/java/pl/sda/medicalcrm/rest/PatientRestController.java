@@ -3,6 +3,7 @@ package pl.sda.medicalcrm.rest;
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.*;
@@ -37,6 +38,7 @@ public class PatientRestController {
     }
 
     @GetMapping(path = "/{userId}")
+    @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody
     Patient getPatientData(@PathVariable Long userId) {
         return patientService.getPatientData(userId);

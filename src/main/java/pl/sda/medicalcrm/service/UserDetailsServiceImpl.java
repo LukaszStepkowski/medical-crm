@@ -1,9 +1,12 @@
 package pl.sda.medicalcrm.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.sda.medicalcrm.dto.AuthorizationDto;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 
@@ -19,8 +22,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        //TODO deserialize json
-        return userRepository.findByUsername(s).get();
+        Gson gson = new GsonBuilder().create();
+        AuthorizationDto authorizationDto = gson.fromJson(s, AuthorizationDto.class);
+        //TODO implement password check
+        return userRepository.findByUsername(authorizationDto.getUsername()).get();
     }
 
 
