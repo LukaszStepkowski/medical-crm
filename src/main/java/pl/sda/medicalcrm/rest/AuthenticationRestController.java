@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.User;
-import pl.sda.medicalcrm.service.UserDetailsServiceImpl;
+import pl.sda.medicalcrm.service.AuthenticationService;
 
 @Controller
 @RequestMapping(path = "/authenticate")
@@ -13,12 +13,12 @@ import pl.sda.medicalcrm.service.UserDetailsServiceImpl;
 public class AuthenticationRestController {
 
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    AuthenticationService authenticationService;
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody
-    User authenticateUser (@RequestBody String login, String password){
-        return (User) userDetailsService.loadUserByUsername(login);
+    User authenticateUser (@RequestBody String authentication){
+        return (User) authenticationService.authenticateUser(authentication);
     }
 }
