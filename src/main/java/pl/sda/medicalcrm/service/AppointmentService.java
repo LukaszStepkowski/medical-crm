@@ -1,7 +1,10 @@
 package pl.sda.medicalcrm.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.sda.medicalcrm.dto.AppointmentDto;
 import pl.sda.medicalcrm.entity.Appointment;
 import pl.sda.medicalcrm.entity.Examination;
 import pl.sda.medicalcrm.repository.AppointmentRepository;
@@ -34,10 +37,13 @@ public class AppointmentService {
     }
 
     @Transactional
-    public Long makeNewAppointment(Appointment appointment, String patientId, String specializationId, String clinicId){
-        appointment.setUser(userRepository.findById(Long.valueOf(patientId)).get());
-        appointment.setSpecialization(specializationRepository.findById(Long.valueOf(specializationId)).get());
-        appointment.setClinic(clinicRepository.findById(Long.valueOf(clinicId)).get());
+    public Long makeNewAppointment(AppointmentDto appointmentDto){
+        Appointment appointment = new Appointment();
+        appointment.setUser(userRepository.findById(appointmentDto.getUserId()).get());
+        appointment.setSpecialization(specializationRepository.findById(appointmentDto.getSpecializationId()).get());
+        appointment.setClinic(clinicRepository.findById(appointmentDto.getClinicId()).get());
+        appointment.setAppointmentDate(appointmentDto.getAppointmentDate());
+        appointment.setOnline(appointmentDto.isOnline());
         if (isAppointmentDateForUserAvailable(appointment)) return 0L;
         appointmentRepository.save(appointment);
         return appointment.getId();
