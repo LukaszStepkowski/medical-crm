@@ -22,10 +22,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Gson gson = new GsonBuilder().create();
-        AuthorizationDto authorizationDto = gson.fromJson(s, AuthorizationDto.class);
-        //TODO implement password check
-        return userRepository.findByUsername(authorizationDto.getUsername()).get();
+//        Gson gson = new GsonBuilder().create();
+//        AuthorizationDto authorizationDto = gson.fromJson(s, AuthorizationDto.class);
+//        //TODO implement password check
+        return userRepository.findByUsername(s).get();
     }
 
 

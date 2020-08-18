@@ -25,7 +25,6 @@ public class AppointmentRestController {
     Long makeNewAppointment(@RequestBody AppointmentDto appointmentDto){
         return appointmentService.makeNewAppointment(appointmentDto);
     }
-    //TODO change params to Long
 
     @DeleteMapping(path = "/{appointmentId}")
     public @ResponseBody String deleteAppointment(@PathVariable Long appointmentId) {

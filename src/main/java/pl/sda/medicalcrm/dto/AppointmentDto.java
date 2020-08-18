@@ -15,7 +15,7 @@ public class AppointmentDto {
     private Long userId;
 
     @SerializedName(value = "specializationId")
-    private Long SpecializationId;
+    private Long specializationId;
 
     @SerializedName(value = "clinicId")
     private Long clinicId;
@@ -32,7 +32,7 @@ public class AppointmentDto {
     }
 
     public Long getSpecializationId() {
-        return SpecializationId;
+        return specializationId;
     }
 
     public Long getClinicId() {
