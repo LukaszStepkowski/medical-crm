@@ -24,11 +24,9 @@ public class AuthenticationService {
     public UserDetails authenticateUser(String authorization) throws UsernameNotFoundException {
         Gson gson = new GsonBuilder().create();
         AuthorizationDto authorizationDto = gson.fromJson(authorization, AuthorizationDto.class);
-//        UserDetails user = userRepository.findByUsername(authorizationDto.getUsername()).get();
-//        if (!user.getPassword().equals(passwordEncoder.encode(authorizationDto.getPassword())))
-//            throw new UsernameOrPasswordIncorrectException();
+        UserDetails user = userRepository.findByUsername(authorizationDto.getUsername()).get();
+        if (!passwordEncoder.matches(authorizationDto.getPassword(), user.getPassword()))
+            throw new UsernameOrPasswordIncorrectException();
         return userRepository.findByUsername(authorizationDto.getUsername()).get();
     }
-
-    //TODO password verification
 }
