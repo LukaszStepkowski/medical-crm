@@ -1,9 +1,12 @@
 package pl.sda.medicalcrm.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.sda.medicalcrm.dto.AuthorizationDto;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 

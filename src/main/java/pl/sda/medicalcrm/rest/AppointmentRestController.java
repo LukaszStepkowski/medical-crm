@@ -1,8 +1,10 @@
 package pl.sda.medicalcrm.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.medicalcrm.dto.AppointmentDto;
 import pl.sda.medicalcrm.entity.Appointment;
 import pl.sda.medicalcrm.entity.Examination;
 import pl.sda.medicalcrm.service.AppointmentService;
@@ -18,14 +20,11 @@ public class AppointmentRestController {
     private AppointmentService appointmentService;
 
     @PostMapping
+    @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody
-    Long makeNewAppointment(@RequestBody @Valid Appointment appointment,
-                            @RequestParam String patientId,
-                            @RequestParam String specializationId,
-                            @RequestParam String clinicId){
-        return appointmentService.makeNewAppointment(appointment, patientId, specializationId, clinicId);
+    Long makeNewAppointment(@RequestBody AppointmentDto appointmentDto){
+        return appointmentService.makeNewAppointment(appointmentDto);
     }
-    //TODO change params to Long
 
     @DeleteMapping(path = "/{appointmentId}")
     public @ResponseBody String deleteAppointment(@PathVariable Long appointmentId) {
