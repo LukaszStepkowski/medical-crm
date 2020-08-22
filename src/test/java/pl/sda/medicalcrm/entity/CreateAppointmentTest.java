@@ -22,7 +22,7 @@ public class CreateAppointmentTest {
     void createAppointmentTest() {
         //given
         var patient = new Patient();
-        patient.setLogin("test@test.com");
+        patient.setUsername("medicalcrm23@gmail.com");
         patient.setPassword("Password1!");
         patient.setName("Jan");
         patient.setSurname("Kowalski");
@@ -33,7 +33,7 @@ public class CreateAppointmentTest {
         doctor.setName("Karol");
         doctor.setNpwz("1234567");
         doctor.setPassword("Password2!");
-        doctor.setLogin("kanowa");
+        doctor.setUsername("test@test.com.pl");
 
         var specialization = new Specialization();
         specialization.setTypeOfSpecialization("Kardiolog");

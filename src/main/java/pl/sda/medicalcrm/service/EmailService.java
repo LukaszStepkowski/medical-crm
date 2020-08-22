@@ -11,11 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import pl.sda.medicalcrm.dto.*;
 import pl.sda.medicalcrm.entity.*;
-
-import javax.transaction.Transactional;
-import java.util.UUID;
 
 
 @Component
@@ -51,7 +47,7 @@ public class EmailService {
                                         .put("Name", mailName))
                                 .put(Emailv31.Message.TO, new JSONArray()
                                         .put(new JSONObject()
-                                                .put("Email", patient.getLogin())
+                                                .put("Email", patient.getUsername())
                                                 .put("Name", patient.getName() + " " + patient.getSurname())))
                                 .put(Emailv31.Message.SUBJECT, title)
                                 .put(Emailv31.Message.HTMLPART, header + text)));

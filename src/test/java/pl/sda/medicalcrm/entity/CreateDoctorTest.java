@@ -1,13 +1,11 @@
 package pl.sda.medicalcrm.entity;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.validation.ConstraintViolationException;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +23,7 @@ class CreateDoctorTest {
         //given
 
         var doctor = new Doctor();
-        doctor.setLogin("jakowa");
+        doctor.setUsername("test@test.com.pl");
         doctor.setPassword("Password1!");
         doctor.setNpwz("1234567");
         doctor.setName("Jan");
