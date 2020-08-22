@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "/specializations")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://medical-crm-app.herokuapp.com")
 public class SpecializationRestController {
 
     @Autowired

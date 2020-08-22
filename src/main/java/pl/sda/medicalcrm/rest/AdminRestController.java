@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admins")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://medical-crm-app.herokuapp.com")
 public class AdminRestController {
 
     @Autowired

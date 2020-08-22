@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/patients")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://medical-crm-app.herokuapp.com")
 public class PatientRestController {
 
     @Autowired

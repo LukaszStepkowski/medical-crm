@@ -9,7 +9,7 @@ import pl.sda.medicalcrm.service.AuthenticationService;
 
 @Controller
 @RequestMapping(path = "/authenticate")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://medical-crm-app.herokuapp.com")
 public class AuthenticationRestController {
 
     @Autowired
