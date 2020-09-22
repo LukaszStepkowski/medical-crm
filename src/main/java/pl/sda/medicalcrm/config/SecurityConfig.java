@@ -30,11 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .httpBasic()
+        http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/index.html", "/signIn", "/register").permitAll()
+                .antMatchers("/index.html", "/", "/home", "/signIn", "/register").permitAll()
 //                .antMatchers("/home").permitAll()
 //                .antMatchers("/signIn").permitAll()
 //                .antMatchers("/register").permitAll()
