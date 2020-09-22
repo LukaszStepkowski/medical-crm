@@ -511,7 +511,7 @@ const routes = [
     { path: "register", component: _register_register_component__WEBPACK_IMPORTED_MODULE_4__["RegisterComponent"] },
     { path: "user", component: _user_user_component__WEBPACK_IMPORTED_MODULE_6__["UserComponent"], canActivate: [_helpers__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
     { path: "appointment", component: _appointment_appointment_component__WEBPACK_IMPORTED_MODULE_7__["AppointmentComponent"], canActivate: [_helpers__WEBPACK_IMPORTED_MODULE_5__["AuthGuard"]] },
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: '/home' }
 ];
 class AppRoutingModule {
 }
