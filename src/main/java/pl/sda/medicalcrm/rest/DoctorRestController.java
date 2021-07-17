@@ -44,8 +44,8 @@ public class DoctorRestController {
     }
 
     @DeleteMapping(path = "/{userId}")
-    public @ResponseBody String deleteDoctor (@PathVariable Long doctorId) {
-        return doctorService.deleteDoctor(doctorId);
+    public @ResponseBody String deleteDoctor (@PathVariable Long userId) {
+        return doctorService.deleteDoctor(userId);
     }
 
 
