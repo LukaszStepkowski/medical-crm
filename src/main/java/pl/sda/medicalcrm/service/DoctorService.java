@@ -22,14 +22,14 @@ public class DoctorService {
     @Autowired
     private UserRepository userRepository;
 
-    private boolean isUsernameAlreadyInDataBase(User user) {
+    private boolean isLoginAlreadyInDataBase(User user) {
         List<User> allUsers = (List<User>) userRepository.findAll();
         return allUsers.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()));
     }
 
     @Transactional
     public Long registerNewDoctor (Doctor doctor) {
-        if (isUsernameAlreadyInDataBase(doctor)) return 0L;
+        if (isLoginAlreadyInDataBase(doctor)) return 0L;
         doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
         userRepository.save(doctor);
         return doctor.getId();

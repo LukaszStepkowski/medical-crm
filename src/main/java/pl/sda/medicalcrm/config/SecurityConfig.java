@@ -33,12 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/patients").permitAll()
-                .antMatchers("/admins").permitAll()
+                .antMatchers("/doctors").permitAll()
+                .antMatchers("/crmspecialists").permitAll()
                 .antMatchers("/admins/**").hasRole("ADMIN")
-                .antMatchers("/patients/**").hasAnyRole("PATIENT", "CRM")
-                .antMatchers("/doctors/**").hasRole("ADMIN")
-                .antMatchers("/doctors").hasRole("ADMIN")
-                .antMatchers("/crmspecialists/**").hasRole("ADMIN")
+                .antMatchers("/patients/**").hasRole("PATIENT")//.hasAnyRole()
+                .antMatchers("/doctors/**").hasRole("DOCTOR")//.hasAnyRole()
+                .antMatchers("/crmspecialists/**").hasRole("CRMSPECIALIST")//.hasAnyRole()
+                //.antMatchers("/doctors/**").hasAnyRole("ADMIN", "DOCTOR")
                 .anyRequest().authenticated()
                 .and().httpBasic();
     }

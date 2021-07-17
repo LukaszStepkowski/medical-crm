@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.medicalcrm.entity.Doctor;
+import pl.sda.medicalcrm.entity.Patient;
 import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.service.DoctorService;
 
@@ -35,4 +36,17 @@ public class DoctorRestController {
                                                       @RequestBody @Valid Doctor doctor) {
         return doctorService.changeDoctorData(userId, doctor);
     }
+
+    @GetMapping(path = "/{userId}")
+    public @ResponseBody
+    Doctor getDoctorData(@PathVariable Long userId) {
+        return doctorService.getDoctorData(userId);
+    }
+
+    @DeleteMapping(path = "/{userId}")
+    public @ResponseBody String deleteDoctor (@PathVariable Long doctorId) {
+        return doctorService.deleteDoctor(doctorId);
+    }
+
+
 }
