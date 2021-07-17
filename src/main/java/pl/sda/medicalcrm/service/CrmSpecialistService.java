@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import pl.sda.medicalcrm.entity.CrmSpecialist;
 import pl.sda.medicalcrm.entity.User;
 import pl.sda.medicalcrm.enums.TypeOfUser;
+import pl.sda.medicalcrm.exceptions.UserNotFoundException;
 import pl.sda.medicalcrm.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,8 +39,20 @@ public class CrmSpecialistService {
         return crmSpecialist.getId();
     }
 
+    @Transactional
+    public String deleteCrmSpecialist(Long id){
+        userRepository.deleteById(id);
+        return "CrmSpecialist Deleted";
+    }
+
+    public CrmSpecialist getCrmSpecialistData(Long id) {
+        Optional<User> optionalCrmSpecialist = userRepository.findById(id);
+        if (!optionalCrmSpecialist.isPresent()) throw new UserNotFoundException();
+        return (CrmSpecialist) optionalCrmSpecialist.get();
+    }
+
     public List<User> getAllCrmSpecialistsList(){
         List<User> allUsers = (List<User>) userRepository.findAll();
-        return allUsers.stream().filter(u -> u.getTypeOfUser().equals(TypeOfUser.CRM_SPECIALIST)).collect(Collectors.toList());
+        return allUsers.stream().filter(u -> u.getRole().equals("CRMSPECIALIST")).collect(Collectors.toList());
     }
 }

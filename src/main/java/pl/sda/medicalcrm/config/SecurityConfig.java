@@ -30,7 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+       // http.csrf().disable()
+        http.httpBasic()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/patients").permitAll()
                 .antMatchers("/doctors").permitAll()
@@ -40,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/doctors/**").hasRole("DOCTOR")//.hasAnyRole()
                 .antMatchers("/crmspecialists/**").hasRole("CRMSPECIALIST")//.hasAnyRole()
                 //.antMatchers("/doctors/**").hasAnyRole("ADMIN", "DOCTOR")
-                .anyRequest().authenticated()
-                .and().httpBasic();
+                .anyRequest().authenticated();
+
     }
 
     @Override
